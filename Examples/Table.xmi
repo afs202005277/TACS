@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RDBModel:Table
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:RDBModel="https://org/eclipse/RDBModel"
+    xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore"
+    name="Person">
+  <columns name="Name"
+      type="String"/>
+  <primaryKey
+      column="//@columns.0"/>
+</RDBModel:Table>
