@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/ERModel">
+    <!-- Defining attributes for Book entity -->
+    <Attribute xmi:id="attr_name" name="name" type="EString"/>
+    <Attribute xmi:id="attr_code" name="code" type="EString"/>
+    <Attribute xmi:id="attr_year" name="year" type="EInt"/>
+    <Attribute xmi:id="attr_genre" name="genre" type="EString"/>
+    
+    <!-- Defining attributes for Author entity -->
+    <Attribute xmi:id="attr_first_name" name="firstName" type="EString"/>
+    <Attribute xmi:id="attr_last_name" name="lastName" type="EString"/>
+    <Attribute xmi:id="attr_birth_year" name="birthYear" type="EInt"/>
+
+    <!-- Defining keys for Book entity -->
+    <Key xmi:id="book_key" name="id" isPrimary="true"/>
+
+    <!-- Defining keys for Author entity -->
+    <Key xmi:id="author_key" name="id" isPrimary="true"/>
+    
+    <!-- Defining the Book entity -->
+    <Entity xmi:id="e_book" name="Book">
+        <keys xmi:idref="book_key"/>
+        <attributes xmi:idref="attr_name"/>
+        <attributes xmi:idref="attr_code"/>
+        <attributes xmi:idref="attr_year"/>
+        <attributes xmi:idref="attr_genre"/>
+    </Entity>
+    
+    <!-- Defining the Author entity -->
+    <Entity xmi:id="e_author" name="Author">
+        <keys xmi:idref="key2"/>
+        <attributes xmi:idref="attr_first_name"/>
+        <attributes xmi:idref="attr_last_name"/>
+        <attributes xmi:idref="attr_birth_year"/>
+    </Entity>
+    
+    <!-- Defining cardinalities between Book and Author -->
+    <Cardinality xmi:id="oneOrMore" minValue="1" maxValue="-1"/>
+
+    <!-- Defining the relationship between Book and Author -->
+    <Relationship xmi:id="rel1" name="writtenBy">
+        <source xmi:idref="e_book"/>
+        <target xmi:idref="e_author"/>
+        <sourceCardinality xmi:idref="oneOrMore"/>
+        <targetCardinality xmi:idref="oneOrMore"/>
+    </Relationship>
+
+</xmi:XMI>
