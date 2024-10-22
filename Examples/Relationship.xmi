@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERModel:Relationship
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:ERModel="https://org/eclipse/ERModel"
+    name="HaveItem">
+  <source href="Entity.xmi#/"/>
+  <target href="Entity2.xmi#/"/>
+  <sourceCardinality
+      href="Cardinality.xmi#/"/>
+  <targetCardinality
+      href="Cardinality.xmi#/"/>
+</ERModel:Relationship>

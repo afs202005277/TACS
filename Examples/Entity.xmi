@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERModel:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ERModel="https://org/eclipse/ERModel" name="Person">
+  <attributes name="Name" type="String" isPrimary="true"/>
+</ERModel:Entity>
