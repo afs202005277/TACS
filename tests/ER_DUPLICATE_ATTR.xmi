@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/ERModel">
+	<Attribute xmi:id="car_id" name="id" type="Integer" isPrimary="true" />
+	<Attribute xmi:id="car_hp" name="hp" type="Integer" />
+	<Attribute xmi:id="car_horsepower" name="hp" type="Integer" />
+	
+	<Entity xmi:id="entity_car" name="Car">
+		<attributes xmi:idref="car_id"/>
+		<attributes xmi:idref="car_hp"/>
+		<attributes xmi:idref="car_horsepower"/>
+	</Entity>
+</xmi:XMI>

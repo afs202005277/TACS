@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/RDBModel" xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore">
+	<Column xmi:id="pilot_id" name="id" type="Integer" />
+	<Column xmi:id="pilot_name" name="name" type="String" isNullable="false" />
+	<Column xmi:id="pilot_number" name="number" type="Integer" />
+	<Column xmi:id="pilot_active" name="active" type="Boolean" isNullable="false" />
+	<Column xmi:id="pilot_height" name="height" type="Float" />
+	<Column xmi:id="pilot_team" name="team" type="Integer" isNullable="false" />
+	
+	<PrimaryKey xmi:id="pilot_pk">
+		<column xmi:idref="pilot_id" />
+	</PrimaryKey>
+	
+	<ForeignKey xmi:id="pilot_team_fk">
+		<sourceTable xmi:idref="table_pilot"/>
+		<targetTable xmi:idref="table_team"/>
+		<sourceColumn xmi:idref="pilot_team" />
+		<targetColumn xmi:idref="team_id" />
+	</ForeignKey>
+	
+	<Table xmi:id="table_pilot" name="Pilot">
+		<primaryKeys xmi:idref="pilot_pk" />
+		<columns xmi:idref="pilot_id" />
+		<columns xmi:idref="pilot_name" />
+		<columns xmi:idref="pilot_number" />
+		<columns xmi:idref="pilot_active" />
+		<columns xmi:idref="pilot_height" />
+        <foreignKeys xmi:idref="pilot_team_fk" />
+	</Table>
+	
+	<Column xmi:id="team_id" name="id" type="Integer" />
+	<Column xmi:id="team_name" name="name" type="String" isNullable="false" />
+	
+	<PrimaryKey xmi:id="team_pk">
+		<column xmi:idref="team_id" />
+	</PrimaryKey>
+	
+	<Table xmi:id="table_team" name="Team">
+		<primaryKeys xmi:idref="team_pk" />
+        <columns xmi:idref="team_id"/>
+        <columns xmi:idref="team_name"/>
+	</Table>
+	
+	<Column xmi:id="race_id" name="id" type="Integer" />
+	<Column xmi:id="race_location" name="location" type="String" isNullable="false" />
+	<Column xmi:id="race_laps" name="laps" type="Integer" isNullable="false" />
+	<Column xmi:id="race_calendar" name="calendar" type="Integer" isNullable="false" />
+	
+	<PrimaryKey xmi:id="race_pk">
+		<column xmi:idref="race_id" />
+	</PrimaryKey>
+	
+	<ForeignKey xmi:id="race_calendar_fk">
+		<sourceTable xmi:idref="table_race"/>
+		<targetTable xmi:idref="table_calendar"/>
+		<sourceColumn xmi:idref="race_calendar" />
+		<targetColumn xmi:idref="calendar_id" />
+	</ForeignKey>
+	
+	<Table xmi:id="table_race" name="Race">
+		<primaryKeys xmi:idref="race_pk" />
+        <columns xmi:idref="race_id"/>
+        <columns xmi:idref="race_location"/>
+        <columns xmi:idref="race_laps"/>
+        <foreignKeys xmi:idref="race_calendar_fk" />
+	</Table>
+	
+	<Column xmi:id="calendar_id" name="id" type="Integer" />
+	<Column xmi:id="calendar_year" name="year" type="Integer" isNullable="false" />
+	
+	<PrimaryKey xmi:id="calendar_pk">
+		<column xmi:idref="calendar_id" />
+	</PrimaryKey>
+	
+	<Table xmi:id="table_calendar" name="Calendar">
+		<primaryKeys xmi:idref="calendar_pk" />
+        <columns xmi:idref="calendar_id"/>
+        <columns xmi:idref="calendar_year"/>
+	</Table>
+	
+	<Table xmi:id="pilot_race" name="PilotRace">
+		<primaryKeys xmi:idref="pilot_pk" />
+		<primaryKeys xmi:idref="race_pk" />
+	</Table>
+</xmi:XMI>

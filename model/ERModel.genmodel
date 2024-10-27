@@ -5,14 +5,21 @@
     complianceLevel="21.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>ERMetaModel.ecore</foreignModel>
   <genPackages prefix="ERModel" disposableProviderFactory="true" ecorePackage="ERMetaModel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ERMetaModel.ecore#//DataType">
+      <genEnumLiterals ecoreEnumLiteral="ERMetaModel.ecore#//DataType/Integer"/>
+      <genEnumLiterals ecoreEnumLiteral="ERMetaModel.ecore#//DataType/Float"/>
+      <genEnumLiterals ecoreEnumLiteral="ERMetaModel.ecore#//DataType/String"/>
+      <genEnumLiterals ecoreEnumLiteral="ERMetaModel.ecore#//DataType/Boolean"/>
+    </genEnums>
     <genClasses ecoreClass="ERMetaModel.ecore#//Entity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Entity/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ERMetaModel.ecore#//Entity/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ERMetaModel.ecore#//Entity/keys"/>
     </genClasses>
     <genClasses ecoreClass="ERMetaModel.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Attribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Attribute/isPrimary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Attribute/isNullable"/>
     </genClasses>
     <genClasses ecoreClass="ERMetaModel.ecore#//Relationship">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Relationship/name"/>
@@ -24,10 +31,6 @@
     <genClasses ecoreClass="ERMetaModel.ecore#//Cardinality">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Cardinality/minValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Cardinality/maxValue"/>
-    </genClasses>
-    <genClasses ecoreClass="ERMetaModel.ecore#//Key">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Key/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ERMetaModel.ecore#//Key/isPrimary"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

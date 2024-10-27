@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/ERModel">
+	<!-- BEGIN Pilot Entity -->
+		<Attribute xmi:id="pilot_id" name="id" type="Integer" isPrimary="true" />
+		<Attribute xmi:id="pilot_name" name="name" type="String" isNullable="false" />
+		<Attribute xmi:id="pilot_number" name="number" type="Integer" />
+		<Attribute xmi:id="pilot_active" name="active" type="Boolean" isNullable="false" />
+		<Attribute xmi:id="pilot_height" name="height" type="Float" />
+		
+		<Entity xmi:id="entity_pilot" name="Pilot">
+	        <attributes xmi:idref="pilot_id"/>
+	        <attributes xmi:idref="pilot_name"/>
+	        <attributes xmi:idref="pilot_number"/>
+	        <attributes xmi:idref="pilot_active"/>
+	        <attributes xmi:idref="pilot_height"/>
+		</Entity>
+	<!-- END Pilot Entity -->
+	
+	<!-- BEGIN Team Entity -->
+		<Attribute xmi:id="team_id" name="id" type="Integer" isPrimary="true" />
+		<Attribute xmi:id="team_name" name="name" type="String" isNullable="false" />
+		
+		<Entity xmi:id="entity_team" name="Team">
+	        <attributes xmi:idref="team_id"/>
+	        <attributes xmi:idref="team_name"/>
+		</Entity>
+	<!-- END Pilot Entity -->
+	
+	<!-- BEGIN Race Entity -->
+		<Attribute xmi:id="race_id" name="id" type="Integer" isPrimary="true" />
+		<Attribute xmi:id="race_location" name="location" type="String" isNullable="false" />
+		<Attribute xmi:id="race_laps" name="laps" type="Integer" isNullable="false" />
+		
+		<Entity xmi:id="entity_race" name="Race">
+	        <attributes xmi:idref="race_id"/>
+	        <attributes xmi:idref="race_location"/>
+	        <attributes xmi:idref="race_laps"/>
+		</Entity>
+	<!-- END Pilot Entity -->
+	
+	<!-- BEGIN Calendar Entity -->
+		<Attribute xmi:id="calendar_id" name="id" type="Integer" isPrimary="true" />
+		<Attribute xmi:id="calendar_year" name="year" type="Integer" isNullable="false" />
+		
+		<Entity xmi:id="entity_calendar" name="Calendar">
+	        <attributes xmi:idref="calendar_id"/>
+	        <attributes xmi:idref="calendar_year"/>
+		</Entity>
+	<!-- END Calendar Entity -->
+	
+	<!-- BEGIN RELATIONSHIPS -->
+		<Cardinality xmi:id="zero_or_more" minValue="-1" maxValue="-1" />
+		<Cardinality xmi:id="two_or_more" minValue="2" maxValue="-1" />
+		<Cardinality xmi:id="one" minValue="1" maxValue="1" />
+		
+		<Relationship xmi:id="pilot_team" name="drivesFor">
+	        <source xmi:idref="entity_pilot"/>
+	        <target xmi:idref="entity_team"/>
+	        <sourceCardinality xmi:idref="two_or_more"/>
+	        <targetCardinality xmi:idref="one"/>
+		</Relationship>		
+		
+		<Relationship xmi:id="pilot_race" name="racesParticipated">
+	        <source xmi:idref="entity_pilot"/>
+	        <target xmi:idref="entity_race"/>
+	        <sourceCardinality xmi:idref="zero_or_more"/>
+	        <targetCardinality xmi:idref="zero_or_more"/>
+		</Relationship>		
+
+		<Relationship xmi:id="race_calendar" name="belongsTo">
+	        <source xmi:idref="entity_race"/>
+	        <target xmi:idref="entity_calendar"/>
+	        <sourceCardinality xmi:idref="zero_or_more"/>
+	        <targetCardinality xmi:idref="one"/>
+		</Relationship>
+	<!-- END RELATIONSHIPS -->
+</xmi:XMI>
