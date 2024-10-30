@@ -1,0 +1,120 @@
+-- @path ERModel=/ERMetamodel/model/ERMetaModel.ecore
+-- @path RDBModel=/RDBMetamodel/model/RDBMetaModel.ecore
+
+module ERtoRDBTransformation;
+create OUT : RDBModel from IN : ERModel;
+
+-- Transform each Entity to a Table
+rule Entity2Table {
+    from
+        e : ERModel!Entity
+    to
+        t : RDBModel!Table (
+            name <- e.name,
+            columns <- e.attributes->select(a | not a.isPrimary)->collect(a | thisModule.Attribute2Column(a)),
+            primaryKeys <- e.attributes->select(a | a.isPrimary)->collect(a | thisModule.Key2PrimaryKey(a)).first()
+        )
+}
+
+-- Transform Attributes to Columns
+unique lazy rule Attribute2Column {
+    from
+        a : ERModel!Attribute
+    to
+        c : RDBModel!Column (
+            name <- a.name,
+            type <- a.type,
+            isNullable <- a.isNullable
+        )
+}
+
+-- Transform Primary Key Attribute to Primary Key
+unique lazy rule Key2PrimaryKey {
+    from
+        a : ERModel!Attribute (a.isPrimary = true)
+    to
+        pk : RDBModel!PrimaryKey (
+            column <- thisModule.Attribute2Column(a)
+        )
+}
+
+-- Helper to retrieve the Table from an Entity (when Entity2Table is a standard rule)
+helper def: getTableForEntity(e : ERModel!Entity) : RDBModel!Table =
+    RDBModel!Table.allInstances()->select(t | t.name = e.name)->first();
+
+-- Handle 1-to-many Relationships by Creating Foreign Keys
+rule OneToManyRelationship2ForeignKeyV1 {
+    from
+        r : ERModel!Relationship (
+            r.sourceCardinality.maxValue = 1 and (r.targetCardinality.maxValue = -1 or r.targetCardinality.maxValue > 1) 
+        )
+    to
+        fk : RDBModel!ForeignKey (
+            name <- r.name + '_FK',
+            sourceTable <- thisModule.getTableForEntity(r.target),  -- "many" side (target)
+            targetTable <- thisModule.getTableForEntity(r.source),  -- "1" side (source)
+            column <- thisModule.ForeignKeyColumn(r.target, r.source),
+			targetColumn <- thisModule.Attribute2Column(r.source.attributes->select(a | a.isPrimary).first())
+        )
+}
+
+-- Handle many-to-1 Relationships by Creating Foreign Keys
+rule OneToManyRelationship2ForeignKeyV2 {
+    from
+        r : ERModel!Relationship (
+            (r.sourceCardinality.maxValue = -1 or r.sourceCardinality.maxValue > 1)  and r.targetCardinality.maxValue = 1
+        )
+    to
+        fk : RDBModel!ForeignKey (
+            sourceTable <- thisModule.getTableForEntity(r.source),  -- "many" side (source)
+            targetTable <- thisModule.getTableForEntity(r.target),  -- "1" side (target)
+            sourceColumn <- thisModule.ForeignKeyColumn(r.target, r.source),
+			targetColumn <- thisModule.Attribute2Column(r.target.attributes->select(a | a.isPrimary).first())
+        )
+}
+
+-- Handle Many-to-many Relationships by Creating a Join Table
+rule ManyToManyRelationship2JoinTable {
+    from
+        r : ERModel!Relationship (
+            (r.sourceCardinality.maxValue = -1 or r.sourceCardinality.maxValue > 1) and (r.targetCardinality.maxValue = -1 or r.targetCardinality.maxValue > 1)
+        )
+    to
+        joinTable : RDBModel!Table (
+            name <- r.source.name + '_' + r.target.name + '_Join',
+            columns <- Sequence {
+                thisModule.ForeignKeyColumnForJoinTable(r.source),
+                thisModule.ForeignKeyColumnForJoinTable(r.target)
+            }
+        )
+}
+
+
+-- Helper to create a ForeignKey column
+unique lazy rule ForeignKeyColumn {
+	from
+		targetEntity: ERModel!Entity,
+		sourceEntity : ERModel!Entity
+	to
+		t: RDBModel!Column (
+        name <- sourceEntity.name + '_id',
+        type <- 'Integer', -- Assuming INTEGER type for foreign keys
+        isNullable <- false
+    )
+}
+
+-- Helper for many-to-many relationships (returns true if many-to-many)
+helper context ERModel!Relationship def : isManyToMany() : Boolean = 
+    self.sourceCardinality.maxValue = -1 and self.targetCardinality.maxValue = -1;
+
+-- Helper to create ForeignKey column for Join Table
+unique lazy rule ForeignKeyColumnForJoinTable { 
+	from
+		e : ERModel!Entity
+	to
+    	t: RDBModel!Column (
+        name <- e.name + '_id',
+        type <- 'Integer',  -- Assuming foreign key type is INTEGER
+        isNullable <- false
+    )
+}
