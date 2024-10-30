@@ -26,6 +26,7 @@
 		<columns xmi:idref="pilot_active" />
 		<columns xmi:idref="pilot_height" />
         <foreignKeys xmi:idref="pilot_team_fk" />
+        <columns xmi:idref="pilot_team" />
 	</Table>
 	
 	<Column xmi:id="team_id" name="id" type="Integer" />
@@ -63,6 +64,7 @@
         <columns xmi:idref="race_location"/>
         <columns xmi:idref="race_laps"/>
         <foreignKeys xmi:idref="race_calendar_fk" />
+        <columns xmi:idref="race_calendar"/>
 	</Table>
 	
 	<Column xmi:id="calendar_id" name="id" type="Integer" />
@@ -78,8 +80,38 @@
         <columns xmi:idref="calendar_year"/>
 	</Table>
 	
+	<Column xmi:id="pilot_race_pilot" name="pilot_id" type="Integer" />
+	<Column xmi:id="pilot_race_race" name="race_id" type="Integer" />
+	
+	<PrimaryKey xmi:id="pilot_race_pilot_pk">
+		<column xmi:idref="pilot_race_pilot" />
+	</PrimaryKey>
+	
+	<PrimaryKey xmi:id="pilot_race_race_pk">
+		<column xmi:idref="pilot_race_race" />
+	</PrimaryKey>
+	
+	
+	<ForeignKey xmi:id="pilot_race_pilot_fk">
+		<sourceTable xmi:idref="pilot_race"/>
+		<targetTable xmi:idref="table_pilot"/>
+		<sourceColumn xmi:idref="pilot_race_pilot" />
+		<targetColumn xmi:idref="pilot_id" />
+	</ForeignKey>
+	
+	<ForeignKey xmi:id="pilot_race_race_fk">
+		<sourceTable xmi:idref="pilot_race"/>
+		<targetTable xmi:idref="table_race"/>
+		<sourceColumn xmi:idref="pilot_race_race" />
+		<targetColumn xmi:idref="race_id" />
+	</ForeignKey>
+	
 	<Table xmi:id="pilot_race" name="PilotRace">
-		<primaryKeys xmi:idref="pilot_pk" />
-		<primaryKeys xmi:idref="race_pk" />
+		<primaryKeys xmi:idref="pilot_race_pilot_pk" />
+		<primaryKeys xmi:idref="pilot_race_race_pk" />
+		<foreignKeys xmi:idref="pilot_race_pilot_fk" />
+		<foreignKeys xmi:idref="pilot_race_race_fk" />
+        <columns xmi:idref="pilot_race_pilot" />
+        <columns xmi:idref="pilot_race_race" />
 	</Table>
 </xmi:XMI>

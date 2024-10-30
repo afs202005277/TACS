@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/RDBModel" xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore">
+	<Column xmi:id="pilot_id" name="id" type="Integer" />
+	
+	<PrimaryKey xmi:id="pilot_pk">
+		<column xmi:idref="pilot_id" />
+	</PrimaryKey>
+	
 	<Table xmi:id="table_pilot" name="Pilot">
+		<primaryKeys xmi:idref="pilot_pk" />
 	</Table>
 </xmi:XMI>
