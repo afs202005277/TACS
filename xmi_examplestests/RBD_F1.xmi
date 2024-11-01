@@ -4,7 +4,7 @@
 	<Column xmi:id="pilot_name" name="name" type="String" isNullable="false" />
 	<Column xmi:id="pilot_number" name="number" type="Integer" />
 	<Column xmi:id="pilot_active" name="active" type="Boolean" isNullable="false" />
-	<Column xmi:id="pilot_height" name="height" type="Float" />
+	<Column xmi:id="pilot_height" name="height" type="Real" />
 	<Column xmi:id="pilot_team" name="team" type="Integer" isNullable="false" />
 	
 	<PrimaryKey xmi:id="pilot_pk">
