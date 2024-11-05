@@ -67,11 +67,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
     <eLiterals name="Null" literal="Null"/>
-    <eLiterals name="Number" value="1" literal="Number"/>
-    <eLiterals name="Decimal" value="2" literal="Decimal"/>
-    <eLiterals name="Text" value="3" literal="Text"/>
-    <eLiterals name="Boolean" value="4"/>
-    <eLiterals name="Date" value="5" literal="Date"/>
-    <eLiterals name="Time" value="6" literal="Time"/>
+    <eLiterals name="ERNumber" value="1" literal="ERNumber"/>
+    <eLiterals name="ERDecimal" value="2" literal="ERDecimal"/>
+    <eLiterals name="ERText" value="3" literal="ERText"/>
+    <eLiterals name="ERBoolean" value="4" literal="ERBoolean"/>
+    <eLiterals name="ERDate" value="5" literal="ERDate"/>
+    <eLiterals name="ERTime" value="6" literal="ERTime"/>
   </eClassifiers>
 </ecore:EPackage>

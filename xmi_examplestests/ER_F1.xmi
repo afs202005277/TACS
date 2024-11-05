@@ -6,23 +6,23 @@
       xmi:id="pilot_id"
       name="id"
       isPrimary="true"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Attribute
       xmi:id="pilot_name"
       name="name"
-      type="Text"/>
+      type="ERText"/>
   <ERModel:Attribute
       xmi:id="pilot_number"
       name="number"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Attribute
       xmi:id="pilot_active"
       name="active"
-      type="Boolean"/>
+      type="ERBoolean"/>
   <ERModel:Attribute
       xmi:id="pilot_height"
       name="height"
-      type="Decimal"/>
+      type="ERDecimal"/>
   <ERModel:Entity
       xmi:id="entity_pilot"
       name="Pilot">
@@ -41,11 +41,11 @@
       xmi:id="team_id"
       name="id"
       isPrimary="true"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Attribute
       xmi:id="team_name"
       name="name"
-      type="Text"/>
+      type="ERText"/>
   <ERModel:Entity
       xmi:id="entity_team"
       name="Team">
@@ -58,15 +58,15 @@
       xmi:id="race_id"
       name="id"
       isPrimary="true"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Attribute
       xmi:id="race_location"
       name="location"
-      type="Text"/>
+      type="ERText"/>
   <ERModel:Attribute
       xmi:id="race_laps"
       name="laps"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Entity
       xmi:id="entity_race"
       name="Race">
@@ -81,11 +81,11 @@
       xmi:id="calendar_id"
       name="id"
       isPrimary="true"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Attribute
       xmi:id="calendar_year"
       name="year"
-      type="Number"/>
+      type="ERNumber"/>
   <ERModel:Entity
       xmi:id="entity_calendar"
       name="Calendar">

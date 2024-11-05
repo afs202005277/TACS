@@ -4,7 +4,7 @@
     xmlns:ERModel="https://org/eclipse/ERModel">
   <ERModel:Attribute
       xmi:id="car_id"
-      type="Number"
+      type="ERNumber"
       isPrimary="true"/>
   <ERModel:Entity
       xmi:id="entity_car"

@@ -18,7 +18,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
         upperBound="-1" eType="#//Column" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKeys" lowerBound="1"
-        eType="#//PrimaryKey" containment="true"/>
+        upperBound="-1" eType="#//PrimaryKey" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="foreignKeys" upperBound="-1"
         eType="#//ForeignKey" containment="true"/>
   </eClassifiers>
@@ -39,10 +39,10 @@
       <details key="constraints" value="notNull"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="notNull" value="column->size() = column->select(not isNullable)->size()"/>
+      <details key="notNull" value="not column.isNullable"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
-        upperBound="2" eType="#//Column"/>
+        eType="#//Column"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForeignKey">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -64,12 +64,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataType">
     <eLiterals name="Null" literal="Null"/>
-    <eLiterals name="Integer" value="1"/>
-    <eLiterals name="Real" value="2"/>
-    <eLiterals name="String" value="3"/>
-    <eLiterals name="Boolean" value="4"/>
-    <eLiterals name="Date" value="5"/>
-    <eLiterals name="Time" value="6"/>
-    <eLiterals name="Serial" value="7"/>
+    <eLiterals name="RDBInteger" value="1" literal="RDBInteger"/>
+    <eLiterals name="RDBReal" value="2" literal="RDBReal"/>
+    <eLiterals name="RDBString" value="3" literal="RDBString"/>
+    <eLiterals name="RDBBoolean" value="4" literal="RDBBoolean"/>
+    <eLiterals name="RDBDate" value="5" literal="RDBDate"/>
+    <eLiterals name="RDBTime" value="6" literal="RDBTime"/>
   </eClassifiers>
 </ecore:EPackage>
