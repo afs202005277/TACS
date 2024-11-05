@@ -2,8 +2,12 @@
 [module generate('https://org/eclipse/RDBModel')]
 
 
+[template private transform(type: DataType)]
+[if (type = DataType::RDBInteger)]Integer[/if][if (type = DataType::RDBReal)]Real[/if][if (type = DataType::RDBString)]String[/if][if (type = DataType::RDBBoolean)]Boolean[/if][if (type = DataType::RDBDate)]Date[/if][if (type = DataType::RDBTime)]Time[/if]
+[/template]
+
 [template private gen(col: Column)]
-[col.name/] [col.type/]
+[col.name/] [col.type.transform()/]
 [/template]
 
 [template private genCols(aTable : Table)]
