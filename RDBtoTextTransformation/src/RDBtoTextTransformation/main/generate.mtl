@@ -7,7 +7,7 @@
 [/template]
 
 [template private gen(col: Column)]
-[col.name/] [col.type.transform()/]
+[col.name/] [col.type.transform()/] [if not col.isNullable]NOT NULL[/if]
 [/template]
 
 [template private genCols(aTable : Table)]
