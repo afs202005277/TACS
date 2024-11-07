@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/RDBModel" xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore">
+	<Column xmi:id="student_id" name="id" type="RDBInteger" />
+	<Column xmi:id="student_name" name="name" type="RDBString" isNullable="false" />
+	<Column xmi:id="student_dob" name="date_of_birth" type="RDBDate" />
+	<Column xmi:id="student_major" name="major" type="RDBString" />
+	<Column xmi:id="student_gpa" name="gpa" type="RDBReal" />
+
+	<PrimaryKey xmi:id="student_pk">
+		<column xmi:idref="student_id" />
+	</PrimaryKey>
+	
+	<ForeignKey xmi:id="student_major_fk">
+		<sourceTable xmi:idref="table_student"/>
+		<targetTable xmi:idref="table_major"/>
+		<sourceColumn xmi:idref="student_major" />
+		<targetColumn xmi:idref="major_id" />
+	</ForeignKey>
+
+	<Table xmi:id="table_student" name="Student">
+		<primaryKeys xmi:idref="student_pk" />
+		<columns xmi:idref="student_id" />
+		<columns xmi:idref="student_name" />
+		<columns xmi:idref="student_dob" />
+		<columns xmi:idref="student_gpa" />
+		<columns xmi:idref="student_major" />
+		<foreignKeys xmi:idref="student_major_fk" />
+	</Table>
+	
+	<Column xmi:id="major_id" name="id" type="RDBInteger" />
+	<Column xmi:id="major_name" name="name" type="RDBString" isNullable="false" />
+	<Column xmi:id="major_code" name="code" type="RDBString" isNullable="false" />	
+	
+	<PrimaryKey xmi:id="major_pk">
+		<column xmi:idref="major_id" />
+	</PrimaryKey>
+	
+	<Table xmi:id="table_major" name="Major">
+		<primaryKeys xmi:idref="major_pk" />
+		<columns xmi:idref="major_id" />
+		<columns xmi:idref="major_name" />
+		<columns xmi:idref="major_code" />
+	</Table>
+
+	<Column xmi:id="course_id" name="id" type="RDBInteger" />
+	<Column xmi:id="course_name" name="name" type="RDBString" isNullable="false" />
+	<Column xmi:id="course_credits" name="credits" type="RDBInteger" isNullable="false" />
+	<Column xmi:id="course_professor" name="professor" type="RDBInteger" isNullable="false" />
+
+	<PrimaryKey xmi:id="course_pk">
+		<column xmi:idref="course_id" />
+	</PrimaryKey>
+
+	<Table xmi:id="table_course" name="Course">
+		<primaryKeys xmi:idref="course_pk" />
+		<columns xmi:idref="course_id" />
+		<columns xmi:idref="course_name" />
+		<columns xmi:idref="course_credits" />
+	</Table>
+
+	<Column xmi:id="professor_id" name="id" type="RDBInteger" />
+	<Column xmi:id="professor_name" name="name" type="RDBString" isNullable="false" />
+	<Column xmi:id="professor_department" name="department" type="RDBString" />
+
+	<PrimaryKey xmi:id="professor_pk">
+		<column xmi:idref="professor_id" />
+	</PrimaryKey>
+
+	<Table xmi:id="table_professor" name="Professor">
+		<primaryKeys xmi:idref="professor_pk" />
+		<columns xmi:idref="professor_id" />
+		<columns xmi:idref="professor_name" />
+		<columns xmi:idref="professor_department" />
+	</Table>
+
+	<Column xmi:id="major_course_major" name="major_id" type="RDBInteger" />
+	<Column xmi:id="major_course_course" name="course_id" type="RDBInteger" />
+
+	<PrimaryKey xmi:id="major_course_major_pk">
+		<column xmi:idref="major_course_major" />
+	</PrimaryKey>
+
+	<PrimaryKey xmi:id="major_course_course_pk">
+		<column xmi:idref="major_course_course" />
+	</PrimaryKey>
+
+	<ForeignKey xmi:id="major_course_major_fk">
+		<sourceTable xmi:idref="table_major_course"/>
+		<targetTable xmi:idref="table_major"/>
+		<sourceColumn xmi:idref="major_course_major" />
+		<targetColumn xmi:idref="major_id" />
+	</ForeignKey>
+
+	<ForeignKey xmi:id="major_course_course_fk">
+		<sourceTable xmi:idref="table_major_course"/>
+		<targetTable xmi:idref="table_course"/>
+		<sourceColumn xmi:idref="major_course_course" />
+		<targetColumn xmi:idref="course_id" />
+	</ForeignKey>
+
+	<Table xmi:id="table_major_course" name="MajorCourse">
+		<primaryKeys xmi:idref="major_course_major_pk" />
+		<primaryKeys xmi:idref="major_course_course_pk" />
+		<foreignKeys xmi:idref="major_course_major_fk" />
+		<foreignKeys xmi:idref="major_course_course_fk" />
+        <columns xmi:idref="major_course_major" />
+        <columns xmi:idref="major_course_course" />
+	</Table>
+</xmi:XMI>
