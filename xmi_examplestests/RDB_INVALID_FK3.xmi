@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/RDBModel" xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore">
+	<Column xmi:id="author_id" name="id" type="RDBInteger" />
+	<Column xmi:id="author_id2" name="name" type="RDBInteger" />
+
+	<Table xmi:id="table_author" name="Author">
+		<columns xmi:idref="author_id" />
+		<columns xmi:idref="author_id2" />
+	</Table>
+	
+	<PrimaryKey xmi:id="author_pk">
+		<column xmi:idref="author_id" />
+		<column xmi:idref="author_id2" />
+	</PrimaryKey>
+
+	<Column xmi:id="book_author" name="author" type="RDBInteger" isNullable="false" />
+
+	<ForeignKey xmi:id="book_author_fk">
+		<sourceTable xmi:idref="table_book"/>
+		<targetTable xmi:idref="table_author"/>
+		<sourceColumn xmi:idref="book_author" />
+		<targetColumn xmi:idref="author_id" />
+	</ForeignKey>
+
+	<Table xmi:id="table_book" name="Book">
+		<columns xmi:idref="book_author" />
+		<foreignKeys xmi:idref="book_author_fk" />
+	</Table>
+</xmi:XMI>
