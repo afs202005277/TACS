@@ -8,7 +8,7 @@
 	<Column xmi:id="pilot_team" name="team" type="RDBInteger" isNullable="false" />
 	
 	<PrimaryKey xmi:id="pilot_pk">
-		<column xmi:idref="pilot_id" />
+		<columns xmi:idref="pilot_id" />
 	</PrimaryKey>
 	
 	<ForeignKey xmi:id="pilot_team_fk">
@@ -19,7 +19,7 @@
 	</ForeignKey>
 	
 	<Table xmi:id="table_pilot" name="Pilot">
-		<primaryKeys xmi:idref="pilot_pk" />
+		<primaryKey xmi:idref="pilot_pk" />
 		<columns xmi:idref="pilot_id" />
 		<columns xmi:idref="pilot_name" />
 		<columns xmi:idref="pilot_number" />
@@ -33,11 +33,11 @@
 	<Column xmi:id="team_name" name="name" type="RDBString" isNullable="false" />
 	
 	<PrimaryKey xmi:id="team_pk">
-		<column xmi:idref="team_id" />
+		<columns xmi:idref="team_id" />
 	</PrimaryKey>
 	
 	<Table xmi:id="table_team" name="Team">
-		<primaryKeys xmi:idref="team_pk" />
+		<primaryKey xmi:idref="team_pk" />
         <columns xmi:idref="team_id"/>
         <columns xmi:idref="team_name"/>
 	</Table>
@@ -48,7 +48,7 @@
 	<Column xmi:id="race_calendar" name="calendar" type="RDBInteger" isNullable="false" />
 	
 	<PrimaryKey xmi:id="race_pk">
-		<column xmi:idref="race_id" />
+		<columns xmi:idref="race_id" />
 	</PrimaryKey>
 	
 	<ForeignKey xmi:id="race_calendar_fk">
@@ -59,7 +59,7 @@
 	</ForeignKey>
 	
 	<Table xmi:id="table_race" name="Race">
-		<primaryKeys xmi:idref="race_pk" />
+		<primaryKey xmi:idref="race_pk" />
         <columns xmi:idref="race_id"/>
         <columns xmi:idref="race_location"/>
         <columns xmi:idref="race_laps"/>
@@ -71,11 +71,11 @@
 	<Column xmi:id="calendar_year" name="year" type="RDBInteger" isNullable="false" />
 	
 	<PrimaryKey xmi:id="calendar_pk">
-		<column xmi:idref="calendar_id" />
+		<columns xmi:idref="calendar_id" />
 	</PrimaryKey>
 	
 	<Table xmi:id="table_calendar" name="Calendar">
-		<primaryKeys xmi:idref="calendar_pk" />
+		<primaryKey xmi:idref="calendar_pk" />
         <columns xmi:idref="calendar_id"/>
         <columns xmi:idref="calendar_year"/>
 	</Table>
@@ -83,12 +83,9 @@
 	<Column xmi:id="pilot_race_pilot" name="pilot_id" type="RDBInteger" />
 	<Column xmi:id="pilot_race_race" name="race_id" type="RDBInteger" />
 	
-	<PrimaryKey xmi:id="pilot_race_pilot_pk">
-		<column xmi:idref="pilot_race_pilot" />
-	</PrimaryKey>
-	
-	<PrimaryKey xmi:id="pilot_race_race_pk">
-		<column xmi:idref="pilot_race_race" />
+	<PrimaryKey xmi:id="pilot_race_pk">
+		<columns xmi:idref="pilot_race_pilot" />
+		<columns xmi:idref="pilot_race_race" />
 	</PrimaryKey>
 	
 	
@@ -107,8 +104,7 @@
 	</ForeignKey>
 	
 	<Table xmi:id="pilot_race" name="PilotRace">
-		<primaryKeys xmi:idref="pilot_race_pilot_pk" />
-		<primaryKeys xmi:idref="pilot_race_race_pk" />
+		<primaryKey xmi:idref="pilot_race_pk" />
 		<foreignKeys xmi:idref="pilot_race_pilot_fk" />
 		<foreignKeys xmi:idref="pilot_race_race_fk" />
         <columns xmi:idref="pilot_race_pilot" />

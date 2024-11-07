@@ -6,11 +6,11 @@
 	<Column xmi:id="author_active" name="active" type="RDBBoolean" isNullable="false" />
 
 	<PrimaryKey xmi:id="author_pk">
-		<column xmi:idref="author_id" />
+		<columns xmi:idref="author_id" />
 	</PrimaryKey>
 
 	<Table xmi:id="table_author" name="Author">
-		<primaryKeys xmi:idref="author_pk" />
+		<primaryKey xmi:idref="author_pk" />
 		<columns xmi:idref="author_id" />
 		<columns xmi:idref="author_name" />
 		<columns xmi:idref="author_country" />
@@ -25,7 +25,7 @@
 	<Column xmi:id="book_publisher" name="publisher" type="RDBInteger" />
 
 	<PrimaryKey xmi:id="book_pk">
-		<column xmi:idref="book_id" />
+		<columns xmi:idref="book_id" />
 	</PrimaryKey>
 
 	<ForeignKey xmi:id="book_author_fk">
@@ -43,7 +43,7 @@
 	</ForeignKey>
 
 	<Table xmi:id="table_book" name="Book">
-		<primaryKeys xmi:idref="book_pk" />
+		<primaryKey xmi:idref="book_pk" />
 		<columns xmi:idref="book_id" />
 		<columns xmi:idref="book_title" />
 		<columns xmi:idref="book_year" />
@@ -58,11 +58,11 @@
 	<Column xmi:id="genre_name" name="name" type="RDBString" isNullable="false" />
 
 	<PrimaryKey xmi:id="genre_pk">
-		<column xmi:idref="genre_id" />
+		<columns xmi:idref="genre_id" />
 	</PrimaryKey>
 
 	<Table xmi:id="table_genre" name="Genre">
-		<primaryKeys xmi:idref="genre_pk" />
+		<primaryKey xmi:idref="genre_pk" />
 		<columns xmi:idref="genre_id" />
 		<columns xmi:idref="genre_name" />
 	</Table>
@@ -72,11 +72,11 @@
 	<Column xmi:id="publisher_country" name="country" type="RDBString" />
 
 	<PrimaryKey xmi:id="publisher_pk">
-		<column xmi:idref="publisher_id" />
+		<columns xmi:idref="publisher_id" />
 	</PrimaryKey>
 
 	<Table xmi:id="table_publisher" name="Publisher">
-		<primaryKeys xmi:idref="publisher_pk" />
+		<primaryKey xmi:idref="publisher_pk" />
 		<columns xmi:idref="publisher_id" />
 		<columns xmi:idref="publisher_name" />
 		<columns xmi:idref="publisher_country" />
@@ -85,13 +85,11 @@
 	<Column xmi:id="book_genre_book" name="book_id" type="RDBInteger" />
 	<Column xmi:id="book_genre_genre" name="genre_id" type="RDBInteger" />
 
-	<PrimaryKey xmi:id="book_genre_book_pk">
-		<column xmi:idref="book_genre_book" />
+	<PrimaryKey xmi:id="book_genre_pk">
+		<columns xmi:idref="book_genre_book" />
+		<columns xmi:idref="book_genre_genre" />
 	</PrimaryKey>
 
-	<PrimaryKey xmi:id="book_genre_genre_pk">
-		<column xmi:idref="book_genre_genre" />
-	</PrimaryKey>
 
 	<ForeignKey xmi:id="book_genre_book_fk">
 		<sourceTable xmi:idref="table_book_genre"/>
@@ -108,8 +106,7 @@
 	</ForeignKey>
 
 	<Table xmi:id="table_book_genre" name="BookGenre">
-		<primaryKeys xmi:idref="book_genre_book_pk" />
-		<primaryKeys xmi:idref="book_genre_genre_pk" />
+		<primaryKey xmi:idref="book_genre_pk" />
 		<foreignKeys xmi:idref="book_genre_book_fk" />
 		<foreignKeys xmi:idref="book_genre_genre_fk" />
 		<columns xmi:idref="book_genre_book" />

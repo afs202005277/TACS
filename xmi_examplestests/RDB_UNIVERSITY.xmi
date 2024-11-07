@@ -7,7 +7,7 @@
 	<Column xmi:id="student_gpa" name="gpa" type="RDBReal" />
 
 	<PrimaryKey xmi:id="student_pk">
-		<column xmi:idref="student_id" />
+		<columns xmi:idref="student_id" />
 	</PrimaryKey>
 	
 	<ForeignKey xmi:id="student_major_fk">
@@ -18,7 +18,7 @@
 	</ForeignKey>
 
 	<Table xmi:id="table_student" name="Student">
-		<primaryKeys xmi:idref="student_pk" />
+		<primaryKey xmi:idref="student_pk" />
 		<columns xmi:idref="student_id" />
 		<columns xmi:idref="student_name" />
 		<columns xmi:idref="student_dob" />
@@ -32,11 +32,11 @@
 	<Column xmi:id="major_code" name="code" type="RDBString" isNullable="false" />	
 	
 	<PrimaryKey xmi:id="major_pk">
-		<column xmi:idref="major_id" />
+		<columns xmi:idref="major_id" />
 	</PrimaryKey>
 	
 	<Table xmi:id="table_major" name="Major">
-		<primaryKeys xmi:idref="major_pk" />
+		<primaryKey xmi:idref="major_pk" />
 		<columns xmi:idref="major_id" />
 		<columns xmi:idref="major_name" />
 		<columns xmi:idref="major_code" />
@@ -48,11 +48,11 @@
 	<Column xmi:id="course_professor" name="professor" type="RDBInteger" isNullable="false" />
 
 	<PrimaryKey xmi:id="course_pk">
-		<column xmi:idref="course_id" />
+		<columns xmi:idref="course_id" />
 	</PrimaryKey>
 
 	<Table xmi:id="table_course" name="Course">
-		<primaryKeys xmi:idref="course_pk" />
+		<primaryKey xmi:idref="course_pk" />
 		<columns xmi:idref="course_id" />
 		<columns xmi:idref="course_name" />
 		<columns xmi:idref="course_credits" />
@@ -63,11 +63,11 @@
 	<Column xmi:id="professor_department" name="department" type="RDBString" />
 
 	<PrimaryKey xmi:id="professor_pk">
-		<column xmi:idref="professor_id" />
+		<columns xmi:idref="professor_id" />
 	</PrimaryKey>
 
 	<Table xmi:id="table_professor" name="Professor">
-		<primaryKeys xmi:idref="professor_pk" />
+		<primaryKey xmi:idref="professor_pk" />
 		<columns xmi:idref="professor_id" />
 		<columns xmi:idref="professor_name" />
 		<columns xmi:idref="professor_department" />
@@ -76,13 +76,11 @@
 	<Column xmi:id="major_course_major" name="major_id" type="RDBInteger" />
 	<Column xmi:id="major_course_course" name="course_id" type="RDBInteger" />
 
-	<PrimaryKey xmi:id="major_course_major_pk">
-		<column xmi:idref="major_course_major" />
+	<PrimaryKey xmi:id="major_course_pk">
+		<columns xmi:idref="major_course_major" />
+		<columns xmi:idref="major_course_course" />
 	</PrimaryKey>
 
-	<PrimaryKey xmi:id="major_course_course_pk">
-		<column xmi:idref="major_course_course" />
-	</PrimaryKey>
 
 	<ForeignKey xmi:id="major_course_major_fk">
 		<sourceTable xmi:idref="table_major_course"/>
@@ -99,8 +97,7 @@
 	</ForeignKey>
 
 	<Table xmi:id="table_major_course" name="MajorCourse">
-		<primaryKeys xmi:idref="major_course_major_pk" />
-		<primaryKeys xmi:idref="major_course_course_pk" />
+		<primaryKey xmi:idref="major_course_pk" />
 		<foreignKeys xmi:idref="major_course_major_fk" />
 		<foreignKeys xmi:idref="major_course_course_fk" />
         <columns xmi:idref="major_course_major" />

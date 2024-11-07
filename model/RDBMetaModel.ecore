@@ -17,8 +17,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
         upperBound="-1" eType="#//Column" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKeys" lowerBound="1"
-        upperBound="-1" eType="#//PrimaryKey" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKey" eType="#//PrimaryKey"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="foreignKeys" upperBound="-1"
         eType="#//ForeignKey" containment="true"/>
   </eClassifiers>
@@ -33,25 +33,28 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNullable" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimaryKey">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="notNull"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-      <details key="notNull" value="not column.isNullable"/>
+      <details key="notNull" value="columns->size() = columns->select(not isNullable)->size()"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
-        eType="#//Column"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
+        upperBound="-1" eType="#//Column"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForeignKey">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="columnInSource columnInTarget sameTypeKeys"/>
+      <details key="constraints" value="columnInSource columnInTarget sameTypeKeys validFK"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="columnInSource" value="sourceTable.columns->select(c | c.name = sourceColumn.name)->size() = 1"/>
       <details key="columnInTarget" value="targetTable.columns->select(c | c.name = targetColumn.name)->size() = 1"/>
       <details key="sameTypeKeys" value="sourceColumn.type = targetColumn.type"/>
+      <details key="validFK" value="(not targetColumn.isNullable and targetColumn.isUnique)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(targetColumn)->size() = 1 and targetTable.primaryKey.columns->size() = 1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(targetColumn)->size() = 1 and targetColumn.isUnique)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTable" lowerBound="1"
         eType="#//Table"/>

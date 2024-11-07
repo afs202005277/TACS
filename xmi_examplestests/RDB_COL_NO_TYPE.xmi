@@ -4,11 +4,11 @@
 	<Column xmi:id="pilot_name" name="name" />
 	
 	<PrimaryKey xmi:id="pilot_pk">
-		<column xmi:idref="pilot_id" />
+		<columns xmi:idref="pilot_id" />
 	</PrimaryKey>
 	
 	<Table xmi:id="table_pilot" name="Pilot">
-		<primaryKeys xmi:idref="pilot_pk" />
+		<primaryKey xmi:idref="pilot_pk" />
 		<columns xmi:idref="pilot_id" />
 		<columns xmi:idref="pilot_name" />
 	</Table>
