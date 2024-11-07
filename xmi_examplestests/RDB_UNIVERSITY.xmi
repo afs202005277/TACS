@@ -3,7 +3,7 @@
 	<Column xmi:id="student_id" name="id" type="RDBInteger" />
 	<Column xmi:id="student_name" name="name" type="RDBString" isNullable="false" />
 	<Column xmi:id="student_dob" name="date_of_birth" type="RDBDate" />
-	<Column xmi:id="student_major" name="major" type="RDBString" />
+	<Column xmi:id="student_major" name="major" type="RDBInteger" />
 	<Column xmi:id="student_gpa" name="gpa" type="RDBReal" />
 
 	<PrimaryKey xmi:id="student_pk">
