@@ -4,12 +4,14 @@
 	<Column xmi:id="author_name" name="name" type="RDBString" isNullable="false" />
 
 	<Table xmi:id="table_author" name="Author">
+		<primaryKey xmi:idref="author_pk" />
+		<columns xmi:idref="author_id" />
 		<columns xmi:idref="author_id" />
 		<columns xmi:idref="author_name" />
 	</Table>
 	
 	<PrimaryKey xmi:id="author_pk">
-		<column xmi:idref="author_id" />
+		<columns xmi:idref="author_id" />
 	</PrimaryKey>
 
 	<Column xmi:id="book_author" name="author" type="RDBInteger" isNullable="false" />
