@@ -15,7 +15,7 @@ rule Entity2Table {
         t : RDBModel!Table (
             name <- e.name,
             columns <- e.attributes->select(a | not a.isPrimary)->collect(a | thisModule.Attribute2Column(a)),
-            primaryKeys <- e.attributes->select(a | a.isPrimary)->collect(a | thisModule.Key2PrimaryKey(a)).first()
+            primaryKey <- e.attributes->select(a | a.isPrimary)->collect(a | thisModule.Key2PrimaryKey(a)).first()
         )
 }
 
@@ -65,7 +65,7 @@ unique lazy rule Key2PrimaryKey {
         a : ERModel!Attribute (a.isPrimary = true)
     to
         pk : RDBModel!PrimaryKey (
-            column <- thisModule.Attribute2Column(a)
+            columns <- thisModule.Attribute2Column(a)
         )
 }
 
@@ -84,7 +84,7 @@ rule OneToManyRelationship2ForeignKeyV1 {
             name <- r.name + '_FK',
             sourceTable <- thisModule.getTableForEntity(r.target),  -- "many" side (target)
             targetTable <- thisModule.getTableForEntity(r.source),  -- "1" side (source)
-            column <- thisModule.ForeignKeyColumn(r.target, r.source),
+            sourceColumn <- thisModule.ForeignKeyColumn(r.target, r.source),
 			targetColumn <- thisModule.Attribute2Column(r.source.attributes->select(a | a.isPrimary).first())
         )
 }
