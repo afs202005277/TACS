@@ -1,16 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: ERMetamodel;singleton:=true
-Automatic-Module-Name: ERMetamodel
+Bundle-SymbolicName: TACS;singleton:=true
+Automatic-Module-Name: TACS
 Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-RequiredExecutionEnvironment: JavaSE-22
 Export-Package: ERModel,
  ERModel.impl,
- ERModel.util
+ ERModel.util,
+ RDBModel,
+ RDBModel.impl,
+ RDBModel.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ocl.pivot;visibility:=reexport,
+ org.eclipse.ocl.examples.codegen;visibility:=reexport
 Bundle-ActivationPolicy: lazy
