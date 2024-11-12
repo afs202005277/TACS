@@ -13,13 +13,4 @@
             class="ERModel.ERModelPackage"
             genModel="model/ERModel.genmodel"/>
    </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated RDBModel -->
-      <package
-            uri="https://org/eclipse/RDBModel"
-            class="RDBModel.RDBModelPackage"
-            genModel="model/RDBModel.genmodel"/>
-   </extension>
-
 </plugin>
