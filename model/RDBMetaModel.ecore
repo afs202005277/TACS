@@ -20,7 +20,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKey" eType="#//PrimaryKey"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="foreignKeys" upperBound="-1"
-        eType="#//ForeignKey" containment="true"/>
+        eType="#//ForeignKey" containment="true" eOpposite="#//ForeignKey/sourceTable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Column">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -57,7 +57,7 @@
       <details key="validFK" value="(not targetColumn.isNullable and targetColumn.isUnique)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(c | c.name = targetColumn.name)->size() = 1 and targetTable.primaryKey.columns->size() = 1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(c | c.name = targetColumn.name)->size() = 1 and targetColumn.isUnique)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTable" lowerBound="1"
-        eType="#//Table"/>
+        eType="#//Table" eOpposite="#//Table/foreignKeys"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetTable" lowerBound="1"
         eType="#//Table"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceColumn" lowerBound="1"
