@@ -9,8 +9,8 @@
 	</Table>
 	
 	<PrimaryKey xmi:id="author_pk">
-		<column xmi:idref="author_id" />
-		<column xmi:idref="author_id2" />
+		<columns xmi:idref="author_id" />
+		<columns xmi:idref="author_id2" />
 	</PrimaryKey>
 
 	<Column xmi:id="book_author" name="author" type="RDBInteger" isNullable="false" />

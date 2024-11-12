@@ -54,7 +54,7 @@
       <details key="columnInSource" value="sourceTable.columns->select(c | c.name = sourceColumn.name)->size() = 1"/>
       <details key="columnInTarget" value="targetTable.columns->select(c | c.name = targetColumn.name)->size() = 1"/>
       <details key="sameTypeKeys" value="sourceColumn.type = targetColumn.type"/>
-      <details key="validFK" value="(not targetColumn.isNullable and targetColumn.isUnique)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(targetColumn)->size() = 1 and targetTable.primaryKey.columns->size() = 1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(targetColumn)->size() = 1 and targetColumn.isUnique)"/>
+      <details key="validFK" value="(not targetColumn.isNullable and targetColumn.isUnique)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(c | c.name = targetColumn.name)->size() = 1 and targetTable.primaryKey.columns->size() = 1)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;or (targetTable.primaryKey.columns->select(c | c.name = targetColumn.name)->size() = 1 and targetColumn.isUnique)"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTable" lowerBound="1"
         eType="#//Table"/>
