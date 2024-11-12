@@ -7,7 +7,7 @@
 [/template]
 
 [template private gen(col: Column)]
-[col.name/] [col.type.transform()/] [if not col.isNullable]NOT NULL[/if]
+[col.name/] [col.type.transform()/] [if not col.isNullable]NOT NULL[/if][if col.isUnique]UNIQUE[/if]
 [/template]
 
 [template private genCols(aTable : Table)]
@@ -16,7 +16,7 @@
 [/template]
 
 [template private genPrimary(aTable : Table)]
-	PRIMARY KEY([for (pk: PrimaryKey | aTable.primaryKeys) separator (', ')][pk.column.name/][/for])
+	PRIMARY KEY([for (pk: Column | aTable.primaryKey.columns) separator (', ')][pk.name/][/for])
 [/template]
 
 [template private genForeign(aTable : Table)]
