@@ -2,7 +2,10 @@
 -- @path RDBModel=/RDBMetamodel/model/RDBMetaModel.ecore
 
 module ERtoRDBTransformation;
+
 create OUT : RDBModel from IN : ERModel;
+
+
 
 -- Transform each Entity to a Table
 rule Entity2Table {
@@ -16,6 +19,34 @@ rule Entity2Table {
         )
 }
 
+-- Helper function to map ERModel types to RDBModel types
+helper def : mapType(type : ERModel!DataType) : RDBModel!DataType =
+    if type= #ERNumber then
+        #RDBInteger
+    else 
+    	if type = #ERDecimal then
+        	#RDBReal
+	    else 
+	    	if type = #ERText then
+		        #RDBString
+		    else 
+		    	if type = #ERBoolean then
+			        #RDBBoolean
+			    else
+			    	if type = #ERDate then
+				        #RDBDate
+				    else
+				    	if type = #ERTime then
+					        #RDBTime
+					    else
+					        type
+						endif
+					endif
+				endif
+			endif
+		endif
+    endif;
+
 -- Transform Attributes to Columns
 unique lazy rule Attribute2Column {
     from
@@ -23,7 +54,7 @@ unique lazy rule Attribute2Column {
     to
         c : RDBModel!Column (
             name <- a.name,
-            type <- a.type,
+            type <- thisModule.mapType(a.type),
             isNullable <- a.isNullable
         )
 }
@@ -98,7 +129,7 @@ unique lazy rule ForeignKeyColumn {
 	to
 		t: RDBModel!Column (
         name <- sourceEntity.name + '_id',
-        type <- 'Integer', -- Assuming INTEGER type for foreign keys
+        type <- #RDBInteger, -- Assuming INTEGER type for foreign keys
         isNullable <- false
     )
 }
@@ -114,7 +145,7 @@ unique lazy rule ForeignKeyColumnForJoinTable {
 	to
     	t: RDBModel!Column (
         name <- e.name + '_id',
-        type <- 'Integer',  -- Assuming foreign key type is INTEGER
+        type <- #RDBInteger,  -- Assuming foreign key type is INTEGER
         isNullable <- false
     )
 }
