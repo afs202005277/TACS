@@ -81,7 +81,6 @@ rule OneToManyRelationship2ForeignKeyV1 {
         )
     to
         fk : RDBModel!ForeignKey (
-            name <- r.name + '_FK',
             sourceTable <- thisModule.getTableForEntity(r.target),  -- "many" side (target)
             targetTable <- thisModule.getTableForEntity(r.source),  -- "1" side (source)
             sourceColumn <- thisModule.ForeignKeyColumn(r.target, r.source),
