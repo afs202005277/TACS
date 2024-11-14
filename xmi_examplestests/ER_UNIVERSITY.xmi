@@ -4,21 +4,23 @@
   <!-- Student Entity and Attributes -->
   <ERModel:Attribute xmi:id="student_id" name="id" isPrimary="true" type="ERNumber"/>
   <ERModel:Attribute xmi:id="student_name" name="name" type="ERText"/>
-  <ERModel:Attribute xmi:id="student_dob" name="date_of_birth" type="ERDate"/>
-  <ERModel:Attribute xmi:id="student_major" name="major" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="student_number" name="number" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="student_age" name="age" type="ERNumber"/>
   <ERModel:Attribute xmi:id="student_gpa" name="gpa" type="ERDecimal"/>
+
   <ERModel:Entity xmi:id="entity_student" name="Student">
     <attributes href="#student_id"/>
     <attributes href="#student_name"/>
-    <attributes href="#student_dob"/>
+    <attributes href="#student_number"/>
+    <attributes href="#student_age"/>
     <attributes href="#student_gpa"/>
-    <attributes href="#student_major"/>
   </ERModel:Entity>
 
   <!-- Major Entity and Attributes -->
   <ERModel:Attribute xmi:id="major_id" name="id" isPrimary="true" type="ERNumber"/>
   <ERModel:Attribute xmi:id="major_name" name="name" type="ERText"/>
   <ERModel:Attribute xmi:id="major_code" name="code" type="ERText"/>
+  
   <ERModel:Entity xmi:id="entity_major" name="Major">
     <attributes href="#major_id"/>
     <attributes href="#major_name"/>
@@ -29,30 +31,24 @@
   <ERModel:Attribute xmi:id="course_id" name="id" isPrimary="true" type="ERNumber"/>
   <ERModel:Attribute xmi:id="course_name" name="name" type="ERText"/>
   <ERModel:Attribute xmi:id="course_credits" name="credits" type="ERNumber"/>
-  <ERModel:Attribute xmi:id="course_professor" name="professor" type="ERNumber"/>
+  
   <ERModel:Entity xmi:id="entity_course" name="Course">
     <attributes href="#course_id"/>
     <attributes href="#course_name"/>
     <attributes href="#course_credits"/>
-    <attributes href="#course_professor"/>
   </ERModel:Entity>
 
   <!-- Professor Entity and Attributes -->
   <ERModel:Attribute xmi:id="professor_id" name="id" isPrimary="true" type="ERNumber"/>
   <ERModel:Attribute xmi:id="professor_name" name="name" type="ERText"/>
+  <ERModel:Attribute xmi:id="professor_number" name="number" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="professor_age" name="age" type="ERNumber"/>
   <ERModel:Attribute xmi:id="professor_department" name="department" type="ERText"/>
+  
   <ERModel:Entity xmi:id="entity_professor" name="Professor">
     <attributes href="#professor_id"/>
     <attributes href="#professor_name"/>
     <attributes href="#professor_department"/>
-  </ERModel:Entity>
-
-  <!-- MajorCourse Entity and Attributes -->
-  <ERModel:Attribute xmi:id="major_course_major" name="major_id" type="ERNumber"/>
-  <ERModel:Attribute xmi:id="major_course_course" name="course_id" type="ERNumber"/>
-  <ERModel:Entity xmi:id="entity_major_course" name="MajorCourse">
-    <attributes href="#major_course_major"/>
-    <attributes href="#major_course_course"/>
   </ERModel:Entity>
 
   <!-- Cardinality Definitions -->
@@ -60,8 +56,8 @@
   <ERModel:Cardinality xmi:id="zero_or_more" minValue="0" maxValue="-1" />
 
   <!-- Relationships -->
-  <ERModel:Relationship xmi:id="student_major_fk" name="hasMajor" source="entity_student" target="entity_major" sourceCardinality="one" targetCardinality="one"/>
-  <ERModel:Relationship xmi:id="major_course_major_fk" name="offersCourse" source="entity_major" target="entity_course" sourceCardinality="one" targetCardinality="zero_or_more"/>
-  <ERModel:Relationship xmi:id="course_professor_fk" name="taughtBy" source="entity_course" target="entity_professor" sourceCardinality="one" targetCardinality="one"/>
+  <ERModel:Relationship xmi:id="student_major_fk" name="hasMajor" source="entity_student" target="entity_major" sourceCardinality="zero_or_more" targetCardinality="one"/>
+  <ERModel:Relationship xmi:id="major_course_major_fk" name="offersCourse" source="entity_major" target="entity_course" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
+  <ERModel:Relationship xmi:id="course_professor_fk" name="taughtBy" source="entity_course" target="entity_professor" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
 
 </xmi:XMI>

@@ -1,129 +1,79 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xmi:XMI xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:ERModel="https://org/eclipse/ERModel">
-  <ERModel:Attribute
-      xmi:id="pilot_id"
-      name="id"
-      isPrimary="true"
-      type="ERNumber"/>
-  <ERModel:Attribute
-      xmi:id="pilot_name"
-      name="name"
-      type="ERText"/>
-  <ERModel:Attribute
-      xmi:id="pilot_number"
-      name="number"
-      type="ERNumber"/>
-  <ERModel:Attribute
-      xmi:id="pilot_active"
-      name="active"
-      type="ERBoolean"/>
-  <ERModel:Attribute
-      xmi:id="pilot_height"
-      name="height"
-      type="ERDecimal"/>
-  <ERModel:Entity
-      xmi:id="entity_pilot"
-      name="Pilot">
-    <attributes
-        href="#pilot_id"/>
-    <attributes
-        href="#pilot_name"/>
-    <attributes
-        href="#pilot_number"/>
-    <attributes
-        href="#pilot_active"/>
-    <attributes
-        href="#pilot_height"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ERModel="https://org/eclipse/ERModel">
+
+  <!-- Pilot Attributes -->
+  <ERModel:Attribute xmi:id="pilot_id" name="id" isPrimary="true" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="pilot_name" name="name" type="ERText"/>
+  <ERModel:Attribute xmi:id="pilot_number" name="number" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="pilot_active" name="active" type="ERBoolean"/>
+  <ERModel:Attribute xmi:id="pilot_height" name="height" type="ERDecimal"/>
+  
+  <!-- Pilot Entity -->
+  <ERModel:Entity xmi:id="entity_pilot" name="Pilot">
+    <attributes href="#pilot_id"/>
+    <attributes href="#pilot_name"/>
+    <attributes href="#pilot_number"/>
+    <attributes href="#pilot_active"/>
+    <attributes href="#pilot_height"/>
   </ERModel:Entity>
-  <ERModel:Attribute
-      xmi:id="team_id"
-      name="id"
-      isPrimary="true"
-      type="ERNumber"/>
-  <ERModel:Attribute
-      xmi:id="team_name"
-      name="name"
-      type="ERText"/>
-  <ERModel:Entity
-      xmi:id="entity_team"
-      name="Team">
-    <attributes
-        href="#team_id"/>
-    <attributes
-        href="#team_name"/>
+
+  <!-- Team Attributes -->
+  <ERModel:Attribute xmi:id="team_id" name="id" isPrimary="true" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="team_name" name="name" type="ERText"/>
+  <ERModel:Attribute xmi:id="team_numberTrophies" name="numberTrophies" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="team_fundedDate" name="fundedDate" type="ERDate"/>
+  
+  <!-- Team Entity -->
+  <ERModel:Entity xmi:id="entity_team" name="Team">
+    <attributes href="#team_id"/>
+    <attributes href="#team_name"/>
+    <attributes href="#team_numberTrophies"/>
+    <attributes href="#team_fundedDate"/>
   </ERModel:Entity>
-  <ERModel:Attribute
-      xmi:id="race_id"
-      name="id"
-      isPrimary="true"
-      type="ERNumber"/>
-  <ERModel:Attribute
-      xmi:id="race_location"
-      name="location"
-      type="ERText"/>
-  <ERModel:Attribute
-      xmi:id="race_laps"
-      name="laps"
-      type="ERNumber"/>
-  <ERModel:Entity
-      xmi:id="entity_race"
-      name="Race">
-    <attributes
-        href="#race_id"/>
-    <attributes
-        href="#race_location"/>
-    <attributes
-        href="#race_laps"/>
+
+  <!-- Race Attributes -->
+  <ERModel:Attribute xmi:id="race_id" name="id" isPrimary="true" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="race_laps" name="laps" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="race_date" name="date" type="ERDate"/>
+  <ERModel:Attribute xmi:id="race_bestLapTime" name="bestLapTime" type="ERTime"/>
+  
+  <!-- Race Entity -->
+  <ERModel:Entity xmi:id="entity_race" name="Race">
+    <attributes href="#race_id"/>
+    <attributes href="#race_laps"/>
+    <attributes href="#race_date"/>
+    <attributes href="#race_bestLapTime"/>
   </ERModel:Entity>
-  <ERModel:Attribute
-      xmi:id="calendar_id"
-      name="id"
-      isPrimary="true"
-      type="ERNumber"/>
-  <ERModel:Attribute
-      xmi:id="calendar_year"
-      name="year"
-      type="ERNumber"/>
-  <ERModel:Entity
-      xmi:id="entity_calendar"
-      name="Calendar">
-    <attributes
-        href="#calendar_id"/>
-    <attributes
-        href="#calendar_year"/>
+
+  <!-- RaceLocation Attributes -->
+  <ERModel:Attribute xmi:id="racelocation_id" name="id" isPrimary="true" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="racelocation_country" name="year" type="ERText"/>
+  
+  <!-- RaceLocationEntity -->
+  <ERModel:Entity xmi:id="entity_racelocation" name="RaceLocation">
+    <attributes href="#racelocation_id"/>
+    <attributes href="#racelocation_country"/>
   </ERModel:Entity>
-  <ERModel:Cardinality
-      xmi:id="zero_or_more"
-      maxValue="-1"/>
-  <ERModel:Cardinality
-      xmi:id="two_or_more"
-      minValue="2"
-      maxValue="-1"/>
-  <ERModel:Cardinality
-      xmi:id="one"
-      minValue="1"
-      maxValue="1"/>
-  <ERModel:Relationship
-      xmi:id="pilot_team"
-      name="drivesFor"
-      source="entity_pilot"
-      target="entity_team"
-      sourceCardinality="two_or_more"
-      targetCardinality="one"/>
-  <ERModel:Relationship
-      xmi:id="pilot_race"
-      name="racesParticipated"
-      source="entity_pilot"
-      target="entity_race"
-      sourceCardinality="zero_or_more"
-      targetCardinality="zero_or_more"/>
-  <ERModel:Relationship
-      xmi:id="race_calendar"
-      name="belongsTo"
-      source="entity_race"
-      target="entity_calendar"
-      sourceCardinality="zero_or_more"
-      targetCardinality="one"/>
+
+  <!-- Calendar Attributes -->
+  <ERModel:Attribute xmi:id="calendar_id" name="id" isPrimary="true" type="ERNumber"/>
+  <ERModel:Attribute xmi:id="calendar_year" name="year" type="ERNumber"/>
+  
+  <!-- Calendar Entity -->
+  <ERModel:Entity xmi:id="entity_calendar" name="Calendar">
+    <attributes href="#calendar_id"/>
+    <attributes href="#calendar_year"/>
+  </ERModel:Entity>
+
+  <!-- Cardinalities -->
+  <ERModel:Cardinality xmi:id="zero_or_more" maxValue="-1"/>
+  <ERModel:Cardinality xmi:id="two_or_more" minValue="2" maxValue="-1"/>
+  <ERModel:Cardinality xmi:id="one" minValue="1" maxValue="1"/>
+  
+  <!-- Relationships -->
+  <ERModel:Relationship xmi:id="pilot_team" name="drivesFor" source="entity_pilot" target="entity_team" sourceCardinality="two_or_more" targetCardinality="one"/>
+  <ERModel:Relationship xmi:id="pilot_race" name="racesParticipated" source="entity_pilot" target="entity_race" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
+  <ERModel:Relationship xmi:id="race_calendar" name="belongsTo" source="entity_race" target="entity_calendar" sourceCardinality="zero_or_more" targetCardinality="one"/>
+  <ERModel:Relationship xmi:id="race_location" name="happenedOn" source="entity_race" target="entity_racelocation" sourceCardinality="zero_or_more" targetCardinality="one"/>
+  
 </xmi:XMI>
