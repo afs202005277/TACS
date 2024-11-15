@@ -30,7 +30,7 @@
 [comment @main/]
 [file (aTable.name + '.sql', false, 'UTF-8')]
 CREATE TABLE [aTable.name/](
-[aTable.genCols()/][if (aTable.primaryKey <> null)],
+[aTable.genCols()/][if (aTable.primaryKey <> null and aTable.primaryKey.columns->size() > 0)],
 [aTable.genPrimary()/][/if][if (aTable.foreignKeys->size() > 0)],
 [aTable.genForeign()/][/if]
 
