@@ -8,7 +8,7 @@ create OUT : RDBModel from IN : ERModel;
 
 
 -- Transform each Entity to a Table
-lazy rule Entity2Table {
+rule Entity2Table {
     from
         e : ERModel!Entity 
     to
@@ -75,11 +75,15 @@ rule OneToManyRelationship2ForeignKey {
         r : ERModel!Relationship (r.isOneToMany())
     to
         fk : RDBModel!ForeignKey (
-            sourceTable <- r.target,  -- "many" side (target)
-            targetTable <- r.source,  -- "1" side (source)
+            sourceTable <- r.target.getTable(),  -- "many" side (target)
+            targetTable <- r.source.getTable(),  -- "1" side (source)
             sourceColumn <- thisModule.ForeignKeyColumn(r.source),
 			targetColumn <- thisModule.Attribute2Column(r.source.attributes->select(a | a.isPrimary).first())
         )
+	do {
+        -- Access the target table using resolveTemp and add the foreign key column
+        r.target.getTable().columns <- r.target.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.source)});
+    }
 }
 
 -- Handle many-to-1 Relationships by Creating Foreign Keys (source: "many", target: "one")
@@ -88,15 +92,14 @@ rule ManyToOneRelationship2ForeignKey {
         r : ERModel!Relationship (r.isManyToOne())
     to
         fk : RDBModel!ForeignKey (
-            sourceTable <- r.source,  -- "many" side (source)
-            targetTable <- r.target,  -- "1" side (target)
+            sourceTable <- r.source.getTable(),  -- "many" side (source)
+            targetTable <- r.target.getTable(),  -- "1" side (target)
             sourceColumn <- thisModule.ForeignKeyColumn(r.target),
-			targetColumn <- thisModule.Attribute2Column(r.target.attributes->select(a | a.isPrimary).first())
+            targetColumn <- thisModule.Attribute2Column(r.target.attributes->select(a | a.isPrimary).first())
         )
-	do {
+    do {
         -- Access the target table using resolveTemp and add the foreign key column
-        let tt : RDBModel!Table = thisModule.resolveTemp(r.target, 't') in
-            tt.columns <- tt.columns->union(Set{thisModule.ForeignKeyColumn(r.target)});
+        r.source.getTable().columns <- r.source.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.target)});
     }
 }
 
