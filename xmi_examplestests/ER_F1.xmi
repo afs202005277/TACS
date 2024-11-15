@@ -47,7 +47,7 @@
 
   <!-- RaceLocation Attributes -->
   <ERModel:Attribute xmi:id="racelocation_id" name="id" isPrimary="true" type="ERNumber"/>
-  <ERModel:Attribute xmi:id="racelocation_country" name="year" type="ERText"/>
+  <ERModel:Attribute xmi:id="racelocation_country" name="country" type="ERText"/>
   
   <!-- RaceLocationEntity -->
   <ERModel:Entity xmi:id="entity_racelocation" name="RaceLocation">

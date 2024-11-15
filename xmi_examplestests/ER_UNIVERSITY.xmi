@@ -48,6 +48,8 @@
   <ERModel:Entity xmi:id="entity_professor" name="Professor">
     <attributes href="#professor_id"/>
     <attributes href="#professor_name"/>
+    <attributes href="#professor_number"/>
+    <attributes href="#professor_age"/>
     <attributes href="#professor_department"/>
   </ERModel:Entity>
 
