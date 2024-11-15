@@ -19,18 +19,12 @@
   <ERModel:Attribute xmi:id="book_id" name="id" isPrimary="true" type="ERNumber" />
   <ERModel:Attribute xmi:id="book_title" name="title" type="ERText" />
   <ERModel:Attribute xmi:id="book_year" name="year" type="ERNumber" />
-  <ERModel:Attribute xmi:id="book_author" name="author" type="ERNumber" />
-  <ERModel:Attribute xmi:id="book_genre" name="genre" type="ERNumber" />
-  <ERModel:Attribute xmi:id="book_publisher" name="publisher" type="ERNumber" />
 
   <!-- Book Entity -->
   <ERModel:Entity xmi:id="entity_book" name="Book">
     <attributes href="#book_id" />
     <attributes href="#book_title" />
     <attributes href="#book_year" />
-    <attributes href="#book_author" />
-    <attributes href="#book_genre" />
-    <attributes href="#book_publisher" />
   </ERModel:Entity>
 
   <!-- Attributes for Genre Entity -->
@@ -55,25 +49,13 @@
     <attributes href="#publisher_country" />
   </ERModel:Entity>
 
-  <!-- Attributes for BookGenre Entity -->
-  <ERModel:Attribute xmi:id="book_genre_book" name="book_id" type="ERNumber" />
-  <ERModel:Attribute xmi:id="book_genre_genre" name="genre_id" type="ERNumber" />
-
-  <!-- BookGenre Entity -->
-  <ERModel:Entity xmi:id="entity_book_genre" name="BookGenre">
-    <attributes href="#book_genre_book" />
-    <attributes href="#book_genre_genre" />
-  </ERModel:Entity>
-
   <!-- Cardinality Definitions -->
   <ERModel:Cardinality xmi:id="one" minValue="1" maxValue="1" />
   <ERModel:Cardinality xmi:id="zero_or_more" minValue="0" maxValue="-1" />
 
   <!-- Relationships -->
-  <ERModel:Relationship xmi:id="book_author_relationship" name="writtenBy" source="entity_book" target="entity_author" sourceCardinality="one" targetCardinality="one" />
-  <ERModel:Relationship xmi:id="book_genre_relationship" name="classifiedAs" source="entity_book" target="entity_genre" sourceCardinality="one" targetCardinality="one" />
-  <ERModel:Relationship xmi:id="book_publisher_relationship" name="publishedBy" source="entity_book" target="entity_publisher" sourceCardinality="one" targetCardinality="one" />
-  <ERModel:Relationship xmi:id="book_genre_book_relationship" name="hasGenre" source="entity_book_genre" target="entity_book" sourceCardinality="zero_or_more" targetCardinality="one" />
-  <ERModel:Relationship xmi:id="book_genre_genre_relationship" name="belongsToGenre" source="entity_book_genre" target="entity_genre" sourceCardinality="zero_or_more" targetCardinality="one" />
+  <ERModel:Relationship xmi:id="book_author_relationship" name="writtenBy" source="entity_book" target="entity_author" sourceCardinality="zero_or_more" targetCardinality="one" />
+  <ERModel:Relationship xmi:id="book_genre_relationship" name="classifiedAs" source="entity_book" target="entity_genre" sourceCardinality="zero_or_more" targetCardinality="zero_or_more" />
+  <ERModel:Relationship xmi:id="book_publisher_relationship" name="publishedBy" source="entity_book" target="entity_publisher" sourceCardinality="zero_or_more" targetCardinality="one" />
 
 </xmi:XMI>
