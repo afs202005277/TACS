@@ -71,3 +71,6 @@ local.properties
 /out.xmi
 
 *.sql
+!xmi_examplestests/f1.sql
+!xmi_examplestests/university.sql
+!xmi_examplestests/library.sql

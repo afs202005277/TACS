@@ -19,7 +19,7 @@ rule Entity2Table {
         )
 }
 
--- Helper function to map ERModel types to RDBModel types
+-- Helper function to map ERModel enum types to RDBModel enum types
 helper def : mapType(type : ERModel!DataType) : RDBModel!DataType =
     if type= #ERNumber then
         #RDBInteger
@@ -47,6 +47,7 @@ helper def : mapType(type : ERModel!DataType) : RDBModel!DataType =
 		endif
     endif;
 
+
 -- Transform Attributes to Columns
 unique lazy rule Attribute2Column {
     from
@@ -60,14 +61,17 @@ unique lazy rule Attribute2Column {
         )
 }
 
+
+-- Transform Primary Key attributes into actual Primary Keys
 unique lazy rule Key2PrimaryKey {
     from
-        pkAttributes : Sequence(ERModel!Attribute)  -- List of primary key attributes
+        pkAttributes : Sequence(ERModel!Attribute)
     to
         pk : RDBModel!PrimaryKey (
             columns <- pkAttributes->collect(a | thisModule.Attribute2Column(a))
         )
 }
+
 
 -- Handle 1-to-many Relationships by Creating Foreign Keys (source: "one", target: "many")
 rule OneToManyRelationship2ForeignKey {
@@ -75,16 +79,16 @@ rule OneToManyRelationship2ForeignKey {
         r : ERModel!Relationship (r.isOneToMany())
     to
         fk : RDBModel!ForeignKey (
-            sourceTable <- r.target.getTable(),  -- "many" side (target)
-            targetTable <- r.source.getTable(),  -- "1" side (source)
+            sourceTable <- r.target.getTable(),
+            targetTable <- r.source.getTable(),
             sourceColumn <- thisModule.ForeignKeyColumn(r.source),
 			targetColumn <- thisModule.Attribute2Column(r.source.attributes->select(a | a.isPrimary).first())
         )
 	do {
-        -- Access the target table using resolveTemp and add the foreign key column
         r.target.getTable().columns <- r.target.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.source)});
     }
 }
+
 
 -- Handle many-to-1 Relationships by Creating Foreign Keys (source: "many", target: "one")
 rule ManyToOneRelationship2ForeignKey {
@@ -92,27 +96,18 @@ rule ManyToOneRelationship2ForeignKey {
         r : ERModel!Relationship (r.isManyToOne())
     to
         fk : RDBModel!ForeignKey (
-            sourceTable <- r.source.getTable(),  -- "many" side (source)
-            targetTable <- r.target.getTable(),  -- "1" side (target)
+            sourceTable <- r.source.getTable(),
+            targetTable <- r.target.getTable(),
             sourceColumn <- thisModule.ForeignKeyColumn(r.target),
             targetColumn <- thisModule.Attribute2Column(r.target.attributes->select(a | a.isPrimary).first())
         )
     do {
-        -- Access the target table using resolveTemp and add the foreign key column
         r.source.getTable().columns <- r.source.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.target)});
     }
 }
 
--- , -- here
---        updatedTargetTable : RDBModel!Table (
---            name <- thisModule.resolveTemp(r.source, 't').name,  -- Use the name of the target table
---			primaryKey <- thisModule.resolveTemp(r.source, 't').primaryKey,
---			foreignKeys <- thisModule.resolveTemp(r.source, 't').foreignKeys->union(Set{fk}),
---            columns <- thisModule.resolveTemp(r.source, 't').columns->union(Set{thisModule.ForeignKeyColumn(r.target)})  -- Add fkColumn to columns
---        )
 
--- Handle Many-to-many Relationships by Creating a Join Table with Composite Primary Key and Foreign Keys
-
+-- Builds a PrimaryKey object from a list of columns
 lazy rule columnsToPK {
 	from
 		cols: Sequence(RDBModel!Column)
@@ -122,6 +117,8 @@ lazy rule columnsToPK {
 		)
 }
 
+
+-- Handle Many-to-many Relationships by Creating a Join Table with Composite Primary Key and Foreign Keys
 rule ManyToManyRelationship2JoinTable {
     from
         r : ERModel!Relationship (r.isManyToMany())
@@ -152,6 +149,7 @@ rule ManyToManyRelationship2JoinTable {
         )
 }
 
+
 -- Helper rule to create ForeignKey object for each side of the Join Table
 lazy rule CreateForeignKeyForJoinTable {
     from
@@ -160,12 +158,13 @@ lazy rule CreateForeignKeyForJoinTable {
         sourceColumn : RDBModel!Column
     to
         fk : RDBModel!ForeignKey (
-            sourceTable <- joinTable,                                  -- Set to the join table
-            targetTable <- targetEntity,      -- Set to the original table of the target entity
-            sourceColumn <- sourceColumn,                              -- Column in the join table
+            sourceTable <- joinTable,
+            targetTable <- targetEntity,
+            sourceColumn <- sourceColumn,
             targetColumn <- thisModule.Attribute2Column(targetEntity.attributes->select(a | a.isPrimary).first())
         )
 }
+
 
 -- Helper to create a ForeignKey column
 unique lazy rule ForeignKeyColumn {
@@ -174,7 +173,7 @@ unique lazy rule ForeignKeyColumn {
 	to
 		t: RDBModel!Column (
         name <- targetEntity.name + '_id',
-        type <- #RDBInteger, -- Assuming INTEGER type for foreign keys
+        type <- #RDBInteger,
         isNullable <- false
     )
 }
