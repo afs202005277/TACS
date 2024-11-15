@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RDBModel:Table xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:RDBModel="https://org/eclipse/RDBModel" name="Car">
+  <columns name="hp" type="RDBInteger"/>
+  <primaryKey/>
+</RDBModel:Table>
