@@ -112,6 +112,16 @@ rule ManyToOneRelationship2ForeignKey {
 --        )
 
 -- Handle Many-to-many Relationships by Creating a Join Table with Composite Primary Key and Foreign Keys
+
+lazy rule columnsToPK {
+	from
+		cols: Sequence(RDBModel!Column)
+	to
+		pk: RDBModel!PrimaryKey(
+			columns <- cols
+		)
+}
+
 rule ManyToManyRelationship2JoinTable {
     from
         r : ERModel!Relationship (r.isManyToMany())
@@ -122,12 +132,11 @@ rule ManyToManyRelationship2JoinTable {
                 thisModule.ForeignKeyColumn(r.source),
                 thisModule.ForeignKeyColumn(r.target)
             },
-            primaryKey <- thisModule.Key2PrimaryKey(
-                Sequence {
+            primaryKey <- thisModule.columnsToPK(Sequence {
                     thisModule.ForeignKeyColumn(r.source),
                     thisModule.ForeignKeyColumn(r.target)
-                }
-            ),
+                })
+            ,
             foreignKeys <- Sequence {
                 thisModule.CreateForeignKeyForJoinTable(
                     joinTable,
