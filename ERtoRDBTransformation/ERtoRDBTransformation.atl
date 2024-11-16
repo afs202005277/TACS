@@ -5,7 +5,14 @@ module ERtoRDBTransformation;
 
 create OUT : RDBModel from IN : ERModel;
 
-
+rule Diagram2Database {
+	from 
+		diag : ERModel!Diagram
+	to
+		db: RDBModel!Database(
+			tables <- diag.entities
+		)
+}
 
 -- Transform each Entity to a Table
 rule Entity2Table {
