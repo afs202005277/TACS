@@ -26,14 +26,16 @@
 
 
 
-[template public generateElement(aTable : Table)]
+[template public generateElement(aDatabase : Database)]
 [comment @main/]
-[file (aTable.name + '.sql', false, 'UTF-8')]
+[file ('database.sql', false, 'UTF-8')]
+[for (aTable: Table | aDatabase.tables)  separator ('\n')]
 CREATE TABLE [aTable.name/](
 [aTable.genCols()/][if (aTable.primaryKey <> null and aTable.primaryKey.columns->size() > 0)],
 [aTable.genPrimary()/][/if][if (aTable.foreignKeys->size() > 0)],
 [aTable.genForeign()/][/if]
 
 );
+[/for]
 [/file]
 [/template]

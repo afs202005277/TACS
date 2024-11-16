@@ -7,7 +7,7 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Database">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Tables" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
         eType="#//Table"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Table">

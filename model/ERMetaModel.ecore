@@ -10,9 +10,9 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="Diagram">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Entities" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entities" upperBound="-1"
         eType="#//Entity"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Relationships" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationships" upperBound="-1"
         eType="#//Relationship"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity">

@@ -110,4 +110,12 @@
         <columns xmi:idref="pilot_race_pilot" />
         <columns xmi:idref="pilot_race_race" />
 	</Table>
+	
+	<Database xmi:id="database">
+		<tables xmi:id="table_pilot"/>
+		<tables xmi:id="table_team"/>
+		<tables xmi:id="table_race"/>
+		<tables xmi:id="table_calendar"/>
+		<tables xmi:id="pilot_race"/>
+	</Database>
 </xmi:XMI>
