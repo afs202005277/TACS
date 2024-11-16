@@ -76,4 +76,12 @@
   <ERModel:Relationship xmi:id="race_calendar" name="belongsTo" source="entity_race" target="entity_calendar" sourceCardinality="zero_or_more" targetCardinality="one"/>
   <ERModel:Relationship xmi:id="race_location" name="happenedOn" source="entity_race" target="entity_racelocation" sourceCardinality="zero_or_more" targetCardinality="one"/>
   
+  <!-- Diagram -->
+  <ERModel:Diagram xmi:id="diagram">
+	  <ERModel:relationships xmi:idref="pilot_team"/>
+	  <ERModel:relationships xmi:idref="pilot_race"/>
+	  <ERModel:relationships xmi:idref="race_calendar"/>
+	  <ERModel:relationships xmi:idref="race_location"/>
+  </ERModel:Diagram>
+  
 </xmi:XMI>

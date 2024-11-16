@@ -112,10 +112,10 @@
 	</Table>
 	
 	<Database xmi:id="database">
-		<tables xmi:id="table_pilot"/>
-		<tables xmi:id="table_team"/>
-		<tables xmi:id="table_race"/>
-		<tables xmi:id="table_calendar"/>
-		<tables xmi:id="pilot_race"/>
+		<tables xmi:idref="table_pilot"/>
+		<tables xmi:idref="table_team"/>
+		<tables xmi:idref="table_race"/>
+		<tables xmi:idref="table_calendar"/>
+		<tables xmi:idref="pilot_race"/>
 	</Database>
 </xmi:XMI>
