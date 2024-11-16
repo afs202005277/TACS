@@ -154,6 +154,9 @@ rule ManyToManyRelationship2JoinTable {
                 )
             }
         )
+		do {
+        	thisModule.getDatabase().tables <- thisModule.getDatabase().tables->union(Set{joinTable});
+		}
 }
 
 
@@ -201,7 +204,7 @@ helper context ERModel!Relationship def : isManyToOne() : Boolean =
 helper context ERModel!Entity def: getTable() : RDBModel!Table =
     RDBModel!Table.allInstances()->select(t | t.name = self.name)->first();
 	
-
-
+helper def : getDatabase() : RDB!Database =
+    RDB!Database.allInstances()->first();
 	
 	
