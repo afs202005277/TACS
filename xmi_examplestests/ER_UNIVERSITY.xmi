@@ -62,4 +62,11 @@
   <ERModel:Relationship xmi:id="major_course_major_fk" name="offersCourse" source="entity_major" target="entity_course" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
   <ERModel:Relationship xmi:id="course_professor_fk" name="taughtBy" source="entity_course" target="entity_professor" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
 
+  <!-- Diagram -->
+  <ERModel:Diagram xmi:id="diagram">
+	  <ERModel:entities xmi:idref="entity_student"/>
+	  <ERModel:entities xmi:idref="entity_professor"/>
+	  <ERModel:entities xmi:idref="entity_major"/>
+	  <ERModel:entities xmi:idref="entity_course"/>
+  </ERModel:Diagram>
 </xmi:XMI>

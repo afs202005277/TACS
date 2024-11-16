@@ -103,4 +103,12 @@
         <columns xmi:idref="major_course_major" />
         <columns xmi:idref="major_course_course" />
 	</Table>
+	
+	<Database xmi:id="database">
+		<tables xmi:idref="table_student"/>
+		<tables xmi:idref="table_major"/>
+		<tables xmi:idref="table_course"/>
+		<tables xmi:idref="table_professor"/>
+		<tables xmi:idref="table_major_course"/>
+	</Database>
 </xmi:XMI>

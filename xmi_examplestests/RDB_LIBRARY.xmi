@@ -112,4 +112,12 @@
 		<columns xmi:idref="book_genre_book" />
 		<columns xmi:idref="book_genre_genre" />
 	</Table>
+	
+	<Database xmi:id="database">
+		<tables xmi:idref="table_author"/>
+		<tables xmi:idref="table_book"/>
+		<tables xmi:idref="table_genre"/>
+		<tables xmi:idref="table_publisher"/>
+		<tables xmi:idref="table_book_genre"/>
+	</Database>
 </xmi:XMI>

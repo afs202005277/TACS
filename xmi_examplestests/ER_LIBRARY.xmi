@@ -58,4 +58,12 @@
   <ERModel:Relationship xmi:id="book_genre_relationship" name="classifiedAs" source="entity_book" target="entity_genre" sourceCardinality="zero_or_more" targetCardinality="zero_or_more" />
   <ERModel:Relationship xmi:id="book_publisher_relationship" name="publishedBy" source="entity_book" target="entity_publisher" sourceCardinality="zero_or_more" targetCardinality="one" />
 
+  <!-- Diagram -->
+  <ERModel:Diagram xmi:id="diagram">
+	  <ERModel:entities xmi:idref="entity_author"/>
+	  <ERModel:entities xmi:idref="entity_book"/>
+	  <ERModel:entities xmi:idref="entity_genre"/>
+	  <ERModel:entities xmi:idref="entity_publisher"/>
+  </ERModel:Diagram>
+
 </xmi:XMI>
