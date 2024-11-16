@@ -78,10 +78,11 @@
   
   <!-- Diagram -->
   <ERModel:Diagram xmi:id="diagram">
-	  <ERModel:relationships xmi:idref="pilot_team"/>
-	  <ERModel:relationships xmi:idref="pilot_race"/>
-	  <ERModel:relationships xmi:idref="race_calendar"/>
-	  <ERModel:relationships xmi:idref="race_location"/>
+	  <ERModel:entities xmi:idref="entity_pilot"/>
+	  <ERModel:entities xmi:idref="entity_team"/>
+	  <ERModel:entities xmi:idref="entity_race"/>
+	  <ERModel:entities xmi:idref="entity_racelocation"/>
+	  <ERModel:entities xmi:idref="entity_calendar"/>
   </ERModel:Diagram>
   
 </xmi:XMI>
