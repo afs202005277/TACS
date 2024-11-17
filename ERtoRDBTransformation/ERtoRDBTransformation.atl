@@ -84,15 +84,18 @@ unique lazy rule Key2PrimaryKey {
 rule OneToManyRelationship2ForeignKey {
     from
         r : ERModel!Relationship (r.isOneToMany())
+	using {
+        fkCol : RDBModel!Column = thisModule.ForeignKeyColumn(r.source);
+    }
     to
         fk : RDBModel!ForeignKey (
             sourceTable <- r.target.getTable(),
             targetTable <- r.source.getTable(),
-            sourceColumn <- thisModule.ForeignKeyColumn(r.source),
+            sourceColumn <- fkCol,
 			targetColumn <- thisModule.Attribute2Column(r.source.attributes->select(a | a.isPrimary).first())
         )
 	do {
-        r.target.getTable().columns <- r.target.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.source)});
+        r.target.getTable().columns <- r.target.getTable().columns->union(Set{fkCol});
     }
 }
 
@@ -101,15 +104,18 @@ rule OneToManyRelationship2ForeignKey {
 rule ManyToOneRelationship2ForeignKey {
     from
         r : ERModel!Relationship (r.isManyToOne())
+	using {
+        fkCol : RDBModel!Column = thisModule.ForeignKeyColumn(r.target);
+    }
     to
         fk : RDBModel!ForeignKey (
             sourceTable <- r.source.getTable(),
             targetTable <- r.target.getTable(),
-            sourceColumn <- thisModule.ForeignKeyColumn(r.target),
+            sourceColumn <- fkCol,
             targetColumn <- thisModule.Attribute2Column(r.target.attributes->select(a | a.isPrimary).first())
         )
     do {
-        r.source.getTable().columns <- r.source.getTable().columns->union(Set{thisModule.ForeignKeyColumn(r.target)});
+        r.source.getTable().columns <- r.source.getTable().columns->union(Set{fkCol});
     }
 }
 
@@ -129,35 +135,40 @@ lazy rule columnsToPK {
 rule ManyToManyRelationship2JoinTable {
     from
         r : ERModel!Relationship (r.isManyToMany())
+	using {
+        sourceFK : RDBModel!Column = thisModule.ForeignKeyColumn(r.source);
+        targetFK : RDBModel!Column = thisModule.ForeignKeyColumn(r.target);
+    }
     to
         joinTable : RDBModel!Table (
             name <- r.source.name + '_' + r.target.name + '_Join',
             columns <- Sequence {
-                thisModule.ForeignKeyColumn(r.source),
-                thisModule.ForeignKeyColumn(r.target)
+                sourceFK,
+                targetFK
             },
             primaryKey <- thisModule.columnsToPK(Sequence {
-                    thisModule.ForeignKeyColumn(r.source),
-                    thisModule.ForeignKeyColumn(r.target)
-                })
-            ,
+                sourceFK,
+                targetFK
+            }),
             foreignKeys <- Sequence {
                 thisModule.CreateForeignKeyForJoinTable(
                     joinTable,
                     r.source,
-                    thisModule.ForeignKeyColumn(r.source)
+                    sourceFK
                 ),
                 thisModule.CreateForeignKeyForJoinTable(
                     joinTable,
                     r.target,
-                    thisModule.ForeignKeyColumn(r.target)
+                    targetFK
                 )
             }
         )
-		do {
-        	thisModule.getDatabase().tables <- thisModule.getDatabase().tables->union(Set{joinTable});
-		}
+    do {
+        -- Add the join table to the database
+        thisModule.getDatabase().tables <- thisModule.getDatabase().tables->union(Set{joinTable});
+    }
 }
+
 
 
 -- Helper rule to create ForeignKey object for each side of the Join Table
@@ -177,7 +188,7 @@ lazy rule CreateForeignKeyForJoinTable {
 
 
 -- Helper to create a ForeignKey column
-unique lazy rule ForeignKeyColumn {
+lazy rule ForeignKeyColumn {
 	from
 		targetEntity: ERModel!Entity
 	to
@@ -204,7 +215,7 @@ helper context ERModel!Relationship def : isManyToOne() : Boolean =
 helper context ERModel!Entity def: getTable() : RDBModel!Table =
     RDBModel!Table.allInstances()->select(t | t.name = self.name)->first();
 	
-helper def : getDatabase() : RDB!Database =
-    RDB!Database.allInstances()->first();
+helper def : getDatabase() : RDBModel!Database =
+    RDBModel!Database.allInstances()->first();
 	
 	
