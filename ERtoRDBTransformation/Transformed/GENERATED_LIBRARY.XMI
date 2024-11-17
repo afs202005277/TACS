@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:RDBModel="https://org/eclipse/RDBModel">
+  <RDBModel:Database tables="/1 /2 /3 /4 /5" name="library"/>
+  <RDBModel:Table name="Author">
+    <columns name="id" type="RDBInteger"/>
+    <columns name="name" type="RDBString"/>
+    <columns name="country" type="RDBString"/>
+    <columns name="active" type="RDBBoolean"/>
+    <primaryKey columns="/1/@columns.0"/>
+  </RDBModel:Table>
+  <RDBModel:Table name="Book">
+    <columns name="id" type="RDBInteger"/>
+    <columns name="title" type="RDBString"/>
+    <columns name="year" type="RDBInteger"/>
+    <columns name="Author_id" type="RDBInteger"/>
+    <columns name="Publisher_id" type="RDBInteger"/>
+    <primaryKey columns="/2/@columns.0"/>
+    <foreignKeys targetTable="/1" sourceColumn="/2/@columns.3" targetColumn="/1/@columns.0"/>
+    <foreignKeys targetTable="/4" sourceColumn="/2/@columns.4" targetColumn="/4/@columns.0"/>
+  </RDBModel:Table>
+  <RDBModel:Table name="Genre">
+    <columns name="id" type="RDBInteger"/>
+    <columns name="name" type="RDBString"/>
+    <primaryKey columns="/3/@columns.0"/>
+  </RDBModel:Table>
+  <RDBModel:Table name="Publisher">
+    <columns name="id" type="RDBInteger"/>
+    <columns name="name" type="RDBString"/>
+    <columns name="country" type="RDBString"/>
+    <primaryKey columns="/4/@columns.0"/>
+  </RDBModel:Table>
+  <RDBModel:Table name="Book_Genre_Join">
+    <columns name="Book_id" type="RDBInteger"/>
+    <columns name="Genre_id" type="RDBInteger"/>
+    <primaryKey columns="/5/@columns.0 /5/@columns.1"/>
+    <foreignKeys targetTable="/2" sourceColumn="/5/@columns.0" targetColumn="/2/@columns.0"/>
+    <foreignKeys targetTable="/3" sourceColumn="/5/@columns.1" targetColumn="/3/@columns.0"/>
+  </RDBModel:Table>
+</xmi:XMI>
