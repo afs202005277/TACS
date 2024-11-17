@@ -104,7 +104,7 @@
         <columns xmi:idref="major_course_course" />
 	</Table>
 	
-	<Database xmi:id="database">
+	<Database xmi:id="database" name="university">
 		<tables xmi:idref="table_student"/>
 		<tables xmi:idref="table_major"/>
 		<tables xmi:idref="table_course"/>

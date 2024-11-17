@@ -28,7 +28,7 @@
 
 [template public generateElement(aDatabase : Database)]
 [comment @main/]
-[file ('database.sql', false, 'UTF-8')]
+[file (aDatabase.name + '.sql', false, 'UTF-8')]
 [for (aTable: Table | aDatabase.tables->sortedBy(foreignKeys->size()))  separator ('\n')]
 CREATE TABLE [aTable.name/](
 [aTable.genCols()/][if (aTable.primaryKey <> null and aTable.primaryKey.columns->size() > 0)],

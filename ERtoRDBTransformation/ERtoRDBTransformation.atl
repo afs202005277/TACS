@@ -10,7 +10,8 @@ rule Diagram2Database {
 		diag : ERModel!Diagram
 	to
 		db: RDBModel!Database(
-			tables <- diag.entities
+			tables <- diag.entities,
+			name <- diag.name
 		)
 }
 
