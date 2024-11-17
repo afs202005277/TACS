@@ -77,7 +77,7 @@
   <ERModel:Relationship xmi:id="race_location" name="happenedOn" source="entity_race" target="entity_racelocation" sourceCardinality="zero_or_more" targetCardinality="one"/>
   
   <!-- Diagram -->
-  <ERModel:Diagram xmi:id="diagram">
+  <ERModel:Diagram xmi:id="diagram" name="f1">
 	  <ERModel:entities xmi:idref="entity_pilot"/>
 	  <ERModel:entities xmi:idref="entity_team"/>
 	  <ERModel:entities xmi:idref="entity_race"/>

@@ -111,7 +111,7 @@
         <columns xmi:idref="pilot_race_race" />
 	</Table>
 	
-	<Database xmi:id="database">
+	<Database xmi:id="database" name="f1">
 		<tables xmi:idref="table_pilot"/>
 		<tables xmi:idref="table_team"/>
 		<tables xmi:idref="table_race"/>

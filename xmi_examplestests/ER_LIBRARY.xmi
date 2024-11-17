@@ -59,7 +59,7 @@
   <ERModel:Relationship xmi:id="book_publisher_relationship" name="publishedBy" source="entity_book" target="entity_publisher" sourceCardinality="zero_or_more" targetCardinality="one" />
 
   <!-- Diagram -->
-  <ERModel:Diagram xmi:id="diagram">
+  <ERModel:Diagram xmi:id="diagram" name="library">
 	  <ERModel:entities xmi:idref="entity_author"/>
 	  <ERModel:entities xmi:idref="entity_book"/>
 	  <ERModel:entities xmi:idref="entity_genre"/>

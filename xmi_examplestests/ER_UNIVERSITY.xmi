@@ -63,7 +63,7 @@
   <ERModel:Relationship xmi:id="course_professor_fk" name="taughtBy" source="entity_course" target="entity_professor" sourceCardinality="zero_or_more" targetCardinality="zero_or_more"/>
 
   <!-- Diagram -->
-  <ERModel:Diagram xmi:id="diagram">
+  <ERModel:Diagram xmi:id="diagram" name="university">
 	  <ERModel:entities xmi:idref="entity_student"/>
 	  <ERModel:entities xmi:idref="entity_professor"/>
 	  <ERModel:entities xmi:idref="entity_major"/>
