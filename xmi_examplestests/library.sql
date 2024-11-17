@@ -18,7 +18,7 @@ CREATE TABLE Book (
 CREATE TABLE Genre (
     id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    PRIMARY KEY(name)
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE Publisher (
