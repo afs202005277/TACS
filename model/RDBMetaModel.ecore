@@ -14,12 +14,19 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Table">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="uniqueName uniqueColumnNames"/>
+      <details key="constraints" value="uniqueName uniqueColumnNames noCyclesInForeignKeys"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
       <details key="uniqueName" value="Table.allInstances()->isUnique(e | e.name)"/>
       <details key="uniqueColumnNames" value="columns->isUnique(e | e.name)"/>
+      <details key="noCyclesInForeignKeys" value="&#xA;            not self.hasCycle(Set{})"/>
     </eAnnotations>
+    <eOperations name="hasCycle" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="&#xA;                if visited->includes(self) then &#xA;                    true&#xA;                else &#xA;                    foreignKeys->exists(fk | fk.targetTable.hasCycle(visited->including(self)))&#xA;                endif"/>
+      </eAnnotations>
+      <eParameters name="visited" ordered="false" upperBound="-1" eType="#//Table"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
         upperBound="-1" eType="#//Column" containment="true"/>
