@@ -24,18 +24,19 @@
 	FOREIGN KEY([fk.sourceColumn.name/]) REFERENCES [fk.targetTable.name/]([fk.targetColumn.name/])[/for]
 [/template]
 
-[template private collectDependencies(aTable : Table)]
-[if (aTable.foreignKeys->size() > 0)]
-    [aTable.foreignKeys->collect(fk | fk.targetTable.name)->asSequence()->union(aTable.foreignKeys->collect(fk | fk.targetTable.collectDependencies())->flatten())->size()/]
-[else]
-    [Sequence{}->size()/]
-[/if]
-[/template]
+
+[query private dependencyLevel(aTable : Table) : Integer =
+    if (aTable.foreignKeys->size() > 0) then
+        1 + aTable.foreignKeys->collect(fk | fk.targetTable.dependencyLevel())->max()
+    else
+        0
+    endif
+/]
 
 [template public generateElement(aDatabase : Database)]
 [comment @main/]
 [file (aDatabase.name + '.sql', false, 'UTF-8')]
-[for (aTable: Table | aDatabase.tables->sortedBy(t | t.collectDependencies()))  separator ('\n')]
+[for (aTable: Table | aDatabase.tables->sortedBy(t | t.dependencyLevel()))  separator ('\n')]
 CREATE TABLE [aTable.name/](
 [aTable.genCols()/][if (aTable.primaryKey <> null and aTable.primaryKey.columns->size() > 0)],
 [aTable.genPrimary()/][/if][if (aTable.foreignKeys->size() > 0)],
