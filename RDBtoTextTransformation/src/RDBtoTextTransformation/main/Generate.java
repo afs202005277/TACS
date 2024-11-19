@@ -337,7 +337,7 @@ public class Generate extends AbstractAcceleoGenerator {
      * 
      * @param resourceSet
      *            The resource set which registry has to be updated.
-     * @generated
+     * @generated NOT
      */
     @Override
     public void registerPackages(ResourceSet resourceSet) {
@@ -347,9 +347,7 @@ public class Generate extends AbstractAcceleoGenerator {
 	        File file = new File("../model/RDBMetaModel.ecore"); 
 	        EObject obj = ModelUtils.load(file, resourceSet); 
 	        resourceSet.getPackageRegistry().put("https://org/eclipse/RDBModel", obj);
-        } catch(IOException exc) {
-        	
-        }
+        } catch(IOException exc) { }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
