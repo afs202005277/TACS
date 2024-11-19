@@ -11,6 +11,7 @@
 package RDBtoTextTransformation.main;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 import org.eclipse.acceleo.engine.event.IAcceleoTextGenerationListener;
 import org.eclipse.acceleo.engine.generation.strategy.IAcceleoGenerationStrategy;
 import org.eclipse.acceleo.engine.service.AbstractAcceleoGenerator;
+import org.eclipse.acceleo.common.utils.*;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
@@ -340,6 +342,14 @@ public class Generate extends AbstractAcceleoGenerator {
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
+        
+        try {
+	        File file = new File("../model/RDBMetaModel.ecore"); 
+	        EObject obj = ModelUtils.load(file, resourceSet); 
+	        resourceSet.getPackageRegistry().put("https://org/eclipse/RDBModel", obj);
+        } catch(IOException exc) {
+        	
+        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"
