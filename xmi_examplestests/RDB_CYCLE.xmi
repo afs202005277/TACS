@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="https://org/eclipse/RDBModel" xsi:schemaLocation="https://org/eclipse/RDBModel ../model/RDBMetaModel.ecore">
+	<Column xmi:id="A_id" name="id" type="RDBInteger" />
+	<Column xmi:id="B_id" name="id" type="RDBInteger" />
+	<Column xmi:id="C_id" name="id" type="RDBInteger" />
+	<Column xmi:id="BA_id" name="fka" type="RDBInteger" />
+	<Column xmi:id="CB_id" name="fkb" type="RDBInteger" />
+	<Column xmi:id="AC_id" name="fkc" type="RDBInteger" />
+	
+	<ForeignKey xmi:id="A_B_fk">
+		<sourceTable xmi:idref="a_table"/>
+		<targetTable xmi:idref="b_table"/>
+		<sourceColumn xmi:idref="A_id" />
+		<targetColumn xmi:idref="BA_id" />
+	</ForeignKey>
+	
+	<ForeignKey xmi:id="B_C_fk">
+		<sourceTable xmi:idref="b_table"/>
+		<targetTable xmi:idref="c_table"/>
+		<sourceColumn xmi:idref="B_id" />
+		<targetColumn xmi:idref="CB_id" />
+	</ForeignKey>
+	
+	<ForeignKey xmi:id="C_A_fk">
+		<sourceTable xmi:idref="c_table"/>
+		<targetTable xmi:idref="a_table"/>
+		<sourceColumn xmi:idref="C_id" />
+		<targetColumn xmi:idref="AC_id" />
+	</ForeignKey>
+
+	<Table xmi:id="a_table" name="A">
+		<columns xmi:idref="A_id" />
+		<columns xmi:idref="AC_id" />
+		<foreignKeys xmi:idref="A_B_fk" />
+	</Table>
+	
+	<Table xmi:id="b_table" name="B">
+		<columns xmi:idref="B_id" />
+		<columns xmi:idref="BA_id" />
+		<foreignKeys xmi:idref="B_C_fk" />
+	</Table>
+	
+	<Table xmi:id="c_table" name="C">
+		<columns xmi:idref="C_id" />
+		<columns xmi:idref="CB_id" />
+		<foreignKeys xmi:idref="C_A_fk" />
+	</Table>
+	
+	
+	<Database xmi:id="database" name="university">
+		<tables xmi:idref="a_table"/>
+		<tables xmi:idref="b_table"/>
+		<tables xmi:idref="c_table"/>
+	</Database>
+</xmi:XMI>
